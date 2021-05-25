@@ -1,0 +1,117 @@
+---
+layout: post
+title: "Landing the First Stage of a SpaceX Falcon 9 Rocket"
+description: "Rocket science with a dash of reinforcement learning"
+date: 2020-08-11 08:27:55 +0800
+categories: technology
+---
+
+When Elon Musk’s SpaceX – short for Space Exploration Technologies – got into the rocket game, it promised reusability, lower launch costs, and easier access to space. Over the last few years, the company has taken steady steps to develop and launch reusable rockets such as the Falcon 9 and Falcon Heavy. Although these launch vehicles are not 100% reusable, the company is working on a fully reusable launch vehicle called Starship, which will take us to the Moon, Mars, and beyond.
+
+{% assign imgs = "../../assets/images/falconinfo.jpg," | split: ',' %}
+{% include image.html images=imgs maxwidth="100%" caption="Full launch sequence of a typical Falcon 9 mission. Credits: SpaceX." %}<br class="img">
+
+The most exciting part of any Falcon 9 launch might be the landing, specifically that of the first stage onto a drone ship out at sea. The Falcon 9’s first stage includes four small carbon-fiber landing legs stowed flat against its fuselage. After the rocket goes through staging, the first stage begins its fall through the atmosphere. Cold gas thrusters near the top flip the rocket around so it’s upright. Then the stage engine fires briefly, just enough to slow its fall. As the stage approaches its target, the legs deploy. In the very final phases of its descent, three of the nine Merlin engines fire one last time for what SpaceX calls the ‘boostback burn’. The stage slows down even further, almost hovering as it makes a soft touchdown. This landing sequence is entirely automated, with the rocket stage responding to real-time data collected by its numerous sensors.
+
+While rocket landing problems are typically solved through conventional trajectory optimization techniques combined with heuristic control, recent developments in deep learning suggest that neural networks are able to approximate the Bellman equation and control spacecraft optimally in real-time using Reinforcement Learning (RL). This project uses an Proximal Policy Optimization (PPO), an improved version of actor-critic algorithm to control the landing of a virtual rocket in a custom OpenAI gym environment.
+
+# Proximal Policy Optimization
+
+The Proximal Policy Optimization (PPO) algorithm was introduced by OpenAI in 2017 and quickly became one of the most popular RL methods usurping the Deep-Q learning method. It involves collecting a small batch of experiences, interacting with the environment, and using that batch to update its decision-making policy. Once the policy is updated with this batch, the experiences are thrown away, and a newer batch is collected with the newly updated policy. This is the reason why PPO is known as an “on-policy learning” approach, where the experience samples collected are only useful for updating the current policy once.
+
+The key contribution of PPO is ensuring that a new update of the policy does not change it too much from the previous policy. This leads to less variance in training at the cost of some bias, but ensures smoother training and also makes sure the agent does not go down an unrecoverable path of taking senseless actions. If you want to learn more about PPO and the clockwork behind it, you can read my [previous blog post](../../2020/PPO).
+
+At the time of writing, OpenAI has released two versions of the PPO algorithm: PPO1 and PPO2. PPO1 is the older of the two algorithms and does not offer any GPU based performance boosts during training. PPO2 is the latest version of PPO and offers GPU acceleration of up to three times compared to the now deprecated PPO1. Implementing these algorithms from scratch can be intimidating, and thankfully, the team at OpenAI has released OpenAI Baselines.
+
+OpenAI Baselines is a set of high-quality implementations of reinforcement learning algorithms. These algorithms make it easier for the research community to replicate, refine, and identify new ideas, and creates good baselines to build research on top of. Their DQN implementation and its variants are roughly on par with the scores in published papers. They expect Baselines to be used as a base around which new ideas can be added, and as a tool for comparing a new approach against existing ones.
+
+# Stable Baselines
+
+Stable Baselines is a set of improved implementations of reinforcement learning algorithms based on OpenAI Baselines. These algorithms make it easier for the research community and industry to replicate, refine, and identify new ideas, and creates good baselines to build projects on top of. The authors of Stable Baselines expect the tools to be used as a base around which new ideas can be added, and as a tool for comparing a new approach against existing ones. They also hope that the simplicity of these tools will allow beginners to experiment with a more advanced toolset, without being buried in implementation details.
+
+Stable Baselines offers a unified structure (scikit-learn like interface) and a single code style that makes it easy for anyone to implement any type of reinforcement learning algorithm they would like on a variety of continuous learning problems. Despite its simplicity of use, Stable Baselines assumes you have some knowledge about reinforcement learning. You should not utilize this library without some practice. To that extent, the authors have provide good resources in the [documentation](https://stable-baselines.readthedocs.io/en/master/guide/rl.html) to get started with reinforcement learning.
+
+# Training the PPO Model
+
+We're going to train the PPO model for 20,000,000 steps on Google Colaboratory. Let's start by installing some dependencies.
+
+{% highlight bash %}
+!pip install gym box2d-py stable_baselines tensorflow==1.15
+{% endhighlight bash %}
+
+Google Colab doesn't come with its own drive where we can upload and download files to, and from, instead, we'll have to mount our own Google Drive.
+
+{% highlight python %}
+from google.colab import drive
+drive.mount('/content/gdrive')
+{% endhighlight python %}
+
+Now, let's clone our custom OpenAI Gym environment from GitHub and install it.
+
+{% highlight bash %}
+cd gdrive/My Drive
+!git clone https://github.com/Jeetu95/Rocket_Lander_Gym.git
+cd Rocket_Lander_Gym/
+pip install .
+{% endhighlight bash %}
+
+Now, let's train our model.
+
+{% highlight python %}
+import gym
+
+from stable_baselines.common.policies import MlpPolicy
+from stable_baselines import PPO2
+import rocket_lander_gym
+
+env = gym.make('RocketLander-v0')
+env.reset()
+
+model = PPO2(MlpPolicy, env, n_steps=1024, nminibatches=256, lam=0.95, gamma=0.99, noptepochs=3, ent_coef=0.01, learning_rate=1e-4, cliprange=0.2, verbose=2)
+model.learn(total_timesteps=20000000)
+{% endhighlight python %}
+
+We'll be using the `MlpPolicy` that implements an actor critic, using a Multi-Layer Perceptrons (2 layers of 64 nodes each). This model uses a novel objective function not typically found in other algorithms:
+
+$$
+L^{C L I P}(\theta)=\hat{E}_{t}\left[\min \left(r_{t}(\theta) \hat{A}_{t}, \operatorname{clip}\left(r_{t}(\theta), 1-\varepsilon, 1+\varepsilon\right) \hat{A}_{t}\right)\right]
+$$
+
+In our program, we've set $$ \varepsilon = 0.2 $$ as recommended by the authors of the [paper on Proximal Policy Optimization](https://arxiv.org/pdf/1707.06347.pdf). This program takes about 10 hours to train the model, so I recommend you do something productive while waiting. Once done, we can save and download the model for offline execution.
+
+{% highlight python %}
+from google.colab import files
+model.save("ppo2-falcon")
+files.download("ppo2-falcon.zip")
+{% endhighlight python %}
+
+# Testing the PPO Model
+
+Let's load and run the pre-trained PPO model on our device. We'll use the `Monitor` class to record and save a video of the run into the `video` directory.
+
+{% highlight python %}
+import gym
+import rocket_lander_gym
+from stable_baselines import PPO2
+
+env = gym.make('RocketLander-v0')
+# Monitor the run
+env = gym.wrappers.Monitor(env, "./video", force=True)
+# Load the saved model
+model = PPO2.load("ppo2-falcon.zip", env=None)
+# Run the trained agent
+obs = env.reset()
+while True:
+    env.render()
+    action, _states = model.predict(obs)
+    obs, rewards, done, info = env.step(action)
+    if done:
+        break
+{% endhighlight python %}
+
+Let's compare the performance of our trained agent with an actual Falcon 9 rocket.
+
+{% assign imgs = "../../assets/images/falconlanding.gif," | split: ',' %}
+{% include image.html images=imgs maxwidth="100%" caption="SpaceX's CRS-8 landing vs our virtual rocket landing in a custom OpenAI gym environment" %}<br class="img">
+
+Although we've managed to replicate SpaceX's success, it's really hard to launch and land an orbital class booster on a drone ship that's floating in the middle of the Atlantic. Wind, ocean current, and the rocket's serviceability play a crucial role in ensuring mission success. As flight computers get powerful, and deep learning algorithms get lighter, we might rely more on RL algorithms such as PPO for continuous control rather than conventional trajectory optimization techniques combined with heuristic control to help us land an orbital class booster.

@@ -1,0 +1,54 @@
+name: Nikhil Raghavendra
+description: Finis Coronat Opus
+meta_description: "I am a Computer Engineering graduate from Singapore Polytechnic currently serving the nation. I'm awaiting entry into Nanyang Technological University's Electrical and Electronic Engineering program next year."
+meta_tags: "nikhil, sp, singapore polytechnic, computer, computer engineering, ntu, nanyang technological university, space, eee"
+
+aboutPage: true
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
+
+paginate: 10
+baseurl:
+domain_name: 'https://nikhilr.io'
+
+#social-icons 
+twitter:
+instagram:
+linkedin:
+github:
+email:
+
+# Details for the RSS feed generator
+url:            'https://nikhilr.io'
+author:         'Nikhil Raghavendra'
+authorTwitter:
+
+permalink:       /:year/:title/
+
+defaults:
+    -
+        scope:
+            path: "" # empty string for all files
+            type: pages
+        values:
+            layout: default
+    -
+        scope:
+            path: "" # empty string for all files
+            type: posts
+        values:
+            layout: post
+    -
+        scope:
+            path: ""
+            type: drafts
+        values:
+            layout: post

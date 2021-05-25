@@ -1,0 +1,158 @@
+---
+layout: post
+title: "Demystifying Proximal Policy Optimization"
+description: "Better than state-of-the-art"
+date: 2020-08-09 10:27:55 +0800
+categories: technology
+---
+
+Reinforcement learning refers to a set of goal-oriented algorithms, which learn how to attain a complex objective or how to maximize the reward gained along a particular dimension over many steps; for example, they can maximize the points won in a game over many moves. RL algorithms can start from a blank slate, and under the right conditions, they achieve superhuman performance. Like a pet incentivized by scolding and treats, these algorithms are penalized when they make the wrong decisions and rewarded when they make the right ones – this is reinforcement.
+
+Reinforcement algorithms that incorporate deep neural networks can beat human experts playing numerous Atari video games, Starcraft II and Dota-2, as well as the world champions of Go. While that may sound trivial to non-gamers, it’s a vast improvement over conventional reinforcement learning, and the state of the art is progressing rapidly.
+
+{% assign imgs = "../../assets/images/openaidota.jpg," | split: ',' %}
+{% include image.html images=imgs maxwidth="100%" caption="OpenAI's Dota 2 bots in action" %}<br class="img">
+
+Reinforcement learning solves the difficult problem of correlating immediate actions with the delayed returns they produce. Like humans, reinforcement learning algorithms sometimes have to wait a while to see the fruit of their decisions. They operate in a delayed return environment, where it can be difficult to understand which action leads to which outcome over many time steps.
+
+It’s reasonable to assume that reinforcement learning algorithms will slowly perform better and better in more ambiguous, real-life environments while choosing from an arbitrary number of possible actions, rather than from the limited options of a repeatable video game. That is, with time, we expect them to be valuable to achieve goals in the real world, like landing the first stage of a Falcon 9 rocket on a drone ship (blog post coming soon!). They may even be the most promising path to strong AI, given sufficient data, and compute.
+
+# How It Works
+
+Reinforcement learning can be understood using the concepts of agents, environments, states, actions and rewards, all of which we’ll explain below. Capital letters tend to denote sets of things, and lower-case letters denote a specific instance of that thing; e.g. `A` is all possible actions, while `a` is a specific action contained in the set.
+
+- Agent: An **agent** takes actions; for example, a drone making a delivery, or Super Mario navigating a video game. The algorithm is the agent. It may be helpful to consider that in life, the agent is you.
+- Action (A): `A` is the set of all possible moves the agent can make. An **action** is almost self-explanatory, but it should be noted that agents usually choose from a list of discrete, possible actions. In video games, the list might include running right or left, jumping high or low, crouching or standing still. In the stock markets, the list might include buying, selling or holding any one of an array of securities and their derivatives. When handling aerial drones, alternatives would include many different velocities and accelerations in 3D space.
+- Discount factor: The **discount factor** is multiplied by future rewards as discovered by the agent in order to dampen these rewards’ effect on the agent’s choice of action. It is designed to make future rewards worth less than immediate rewards; i.e. it enforces a kind of short-term hedonism in the agent. Often expressed with the lower-case Greek letter gamma: γ. If γ is `.8`, and there’s a reward of `10` points after `3` time steps, the present value of that reward is `0.8³ x 10`. A discount factor of `1` would make future rewards worth just as much as immediate rewards. We’re fighting against delayed gratification here.
+- Environment: The world through which the agent moves, and which responds to the agent. The **environment** takes the agent’s current state and action as input, and returns as output the agent’s reward and its next state. If you are the agent, the environment could be the laws of physics and the rules of society that process your actions and determine the consequences of them.
+- State (S): A **state** is a concrete and immediate situation in which the agent finds itself; i.e. a specific place and moment, an instantaneous configuration that puts the agent in relation to other significant things such as tools, obstacles, enemies or prizes. It can be the current situation returned by the environment, or any future situation. Were you ever in the wrong place at the wrong time? That’s a state.
+- Reward (R): A **reward** is the feedback by which we measure the success or failure of an agent’s actions in a given state. For example, in a video game, when Mario touches a coin, he wins points. From any given state, an agent sends output in the form of actions to the environment, and the environment returns the agent’s new state (which resulted from acting on the previous state) as well as rewards, if there are any. Rewards can be immediate or delayed. They effectively evaluate the agent’s action.
+- Policy (π): The **policy** is the strategy that the agent employs to determine the next action based on the current state. It maps states to actions, the actions that promise the highest reward.
+- Value (V): The expected long-term return with discount, as opposed to the short-term reward `R`. `Vπ(s)` is defined as the expected long-term return of the current state under policy `π`. We discount rewards, or lower their estimated **value**, the further into the future they occur.
+- Q-value or action-value (Q): **Q-value** is similar to Value, except that it takes an extra parameter, the current action a. `Qπ(s, a)` refers to the long-term return of an action taking action a under policy `π` from the current state `s`. Q maps state-action pairs to rewards. Note the difference between Q and policy.
+- Trajectory: A sequence of states and actions that influence those states.
+
+# Reward vs Value
+
+**Reward** is an immediate signal that is received in a given state, while value is the sum of all rewards you might anticipate from that state.
+
+**Value** is a long-term expectation, while reward is an immediate pleasure. Value is eating spinach salad for dinner in anticipation of a long and healthy life; reward is eating cocaine for dinner and to hell with it. They differ in their time horizons. So you can have states where value and reward diverge: you might receive a low, immediate reward (spinach) even as you move to position with great potential for long-term value; or you might receive a high immediate reward (cocaine) that leads to diminishing prospects over time. This is why the value function, rather than immediate rewards, is what reinforcement learning seeks to predict and control.
+
+# The RL Feedback Loop
+
+Environments are functions that transform an action taken in the current state into the next state and a reward; agents are functions that transform the new state and reward into the next action. We can know and set the agent’s function, but in most situations where it is useful and interesting to apply reinforcement learning, we do not know the function of the environment. It is a black box where we only see the inputs and outputs. It’s like most people’s relationship with technology: we know what it does, but we don’t know how it works. Reinforcement learning represents an agent’s attempt to approximate the environment’s function, such that we can send actions into the black-box environment that maximize the rewards it spits out.
+
+{% assign imgs = "../../assets/images/rldia.png," | split: ',' %}
+{% include image.html images=imgs maxwidth="531px" caption="A typical reinforcement learning cycle" %}<br class="img">
+
+In the feedback loop above, the subscripts denote the time steps `t` and `t+1`, each of which refer to different states: the state at moment `t`, and the state at moment `t+1`. Unlike other forms of machine learning – such as supervised and unsupervised learning – reinforcement learning can only be thought about sequentially in terms of state-action pairs that occur one after the other.
+
+# Complex Probability Distributions of Reward
+
+The goal of reinforcement learning is to pick the best-known action for any given state, which means the actions have to be ranked, and assigned values relative to one another. Since those actions are state-dependent, what we are really gauging is the value of state-action pairs; i.e. an action taken from a certain state, something you did somewhere. For example, if the action is yelling “Fire!”, then performing the action a crowded theater should mean something different from performing the action next to a squad of men with rifles. We can’t predict an action’s outcome without knowing the context.
+
+We map state-action pairs to the values we expect them to produce with the Q function, described above. The Q function takes as its input an agent’s state and action and maps them to probable rewards.
+
+Reinforcement learning runs the agent through sequences of state-action pairs, observing the rewards that result, and adapting the predictions of the Q function to those rewards until it accurately predicts the best path for the agent to take. That prediction the Q function makes is known as a policy.
+
+Reinforcement learning is iterative. In its most interesting applications, it does not begin by knowing which rewards state-action pairs will produce. It learns those relations by running through states again and again, like athletes or musicians iterate through states in an attempt to improve their performance.
+
+# Proximal Policy Optimization
+
+The Proximal Policy Optimization (PPO) algorithm was introduced by OpenAI in 2017 and quickly became one of the most popular RL methods usurping the Deep-Q learning method. It involves collecting a small batch of experiences interacting with the environment and using that batch to update its decision-making policy. Once the policy is updated with this batch, the experiences are thrown away and a newer batch is collected with the newly updated policy. This is the reason why it is an “on-policy learning” approach where the experience samples collected are only useful for updating the current policy once.
+
+PPO is a policy gradient method that alternates between sampling data through interaction with the environment and optimising a “surrogate” objective function using Stochastic Gradient Ascent (SGA). We use SGA because we want to maximise the reward function and allow our agent to learn how to work properly in it's environment.
+
+Standard policy gradient methods perform one gradient update per data sample while PPO’s objective function enables multiple epochs of mini batch updates. PPO is much simpler to implement, more general and have better empirical sample complexity compared to other state-of-the art algorithms and manages to attain the data efficient and reliable performance of Trust Region Policy Optimization (TRPO), while only using first order optimisation.
+
+PPO uses an objective function with clipped probability ratios, which forms a pessimistic estimate of the performance of the policy. This ensures that the agent doesn't run wild once moderately good policy is achieved while there are better policies that the agent can explore.
+
+# Policy Gradient Methods
+
+Policy gradient methods work by computing an estimator of the policy gradient and plugging it into a stochastic gradient ascent algorithm. A typical gradient estimator looks something like this:
+
+$$
+\hat{g}=\hat{\mathbb{E}}_{t}\left[\nabla_{\theta} \log \pi_{\theta}\left(a_{t} \mid s_{t}\right) \hat{A}_{t}\right]
+$$
+
+Where, $$ \hat{g} $$ is the gradient estimate, $$ \hat{\mathbb{E}}_{t} $$ is the expectation operator which provides the expectation of the value of $$ \nabla_{\theta} \log \pi_{\theta}\left(a_{t} \mid s_{t}\right) \hat{A}_{t} $$  over a finite batch of samples, $$ \nabla_{\theta} $$ is the gradient, $$ \log \pi_{\theta}\left(a_{t} \mid s_{t}\right) $$ is the $$ \log $$ of the probability of the policy $$ \pi_{\theta} $$  taking action $$ a $$  given the state $$ s $$  at timestep $$ t $$, and $$ \hat{A}_{t} $$ is the estimate of the advantage function at timestep $$ t $$.
+
+The gradient estimator tries to provide the expectation of the value of $$ \nabla_{\theta} \log \pi_{\theta}\left(a_{t} \mid s_{t}\right) \hat{A}_{t} $$ over a finite batch of samples. Since the value of $$ \log \pi_{\theta}\left(a_{t} \mid s_{t}\right) $$ is mostly negative for probability values between $$ 0 $$ and $$ 1 $$, the value of $$ \nabla_{\theta} \log \pi_{\theta}\left(a_{t} \mid s_{t}\right) \hat{A}_{t} $$ will only be negative if $$ \nabla_{\theta} $$ and $$ \hat{A}_{t} $$ is positive, i.e. the gradient is positive and the actions that the agent took in the sample trajectory resulted in better than average return. This means the agent is learning properly by maximising the reward function.
+
+Note that the $$ \log $$  operator makes sure we’re being conservative of our predictions by transforming high probability values to a value that is closer to $$ 0 $$.
+
+A general policy optimisation methods usually start by defining the policy gradient loss as the exception over the $$ \log $$  of the policy actions $$ \log \pi_{\theta}\left(a_{t} \mid s_{t}\right) $$ times the estimate of the advantage function $$ \hat{A}_{t} $$:
+
+$$ L^{P G}(\theta)=\hat{\mathbb{E}}_{t}\left[\log \pi_{\theta}\left(a_{t} \mid s_{t}\right) \hat{A}_{t}\right] $$
+
+If the advantage estimate was positive, the actions that the agent took in the sample trajectory resulted in better than average return, and therefore we’ll increase the probability of selecting them again in the future when we encounter the same state. On the other hand, if the advantage estimate was negative, then we’ll reduce the probability of selecting them again in the future when we encounter the same state.
+
+While it's appealing to perform multiple steps of optimization on this loss function using the same trajectory, it leads to a destructively large policy update. We will essentially destroy our policy if we keep running gradient ascent on a single batch of collected experience. One successful approach to solving this issue is to make sure that if we’re updating the policy, we’re never going to move too far away from the old policy.
+
+# Trust Region Methods
+
+In TRPO an objective function (the “surrogate” objective) is maximised subject to a constrain on the size of the policy update.
+
+$$
+\begin{array}{ll}
+\underset{\theta}{\operatorname{maximize}} & \hat{\mathbb{E}}_{t}\left[\frac{\pi_{\theta}\left(a_{t} \mid s_{t}\right)}{\pi_{\theta_{\mathrm{old}}}\left(a_{t} \mid s_{t}\right)} \hat{A}_{t}\right] \\
+\text { subject to } & \hat{\mathbb{E}}_{t}\left[\mathrm{KL}\left[\pi_{\theta_{\mathrm{old}}}\left(\cdot \mid s_{t}\right), \pi_{\theta}\left(\cdot \mid s_{t}\right)\right]\right] \leq \delta
+\end{array}
+$$
+
+This switch from the $$ \log $$ operation to the division operation makes sure that the probability of our agent taking the action $$ a $$ (the same action was taken by the agent using the old policy) is at least the same as the old policy or even higher if the advantage estimate is positive. Maximizing this objective function subject to a KL constraint ensures that the updated policy doesn't move too far away from the current policy and allows the agent to continue learning in a region where it knows everything works fine instead of exploring too much. However, KL constraint adds additional overhead to our optimisation process and can sometimes lead to undesirable training behaviour.
+
+# Clipped Surrogate Objective
+
+Let $$ r_{t}(\theta) $$ denote a probability ratio $$ r_{t}(\theta)=\frac{\pi_{\theta}\left(a_{t} \mid s_{t}\right)}{\pi_{\theta_{\text {old }}}\left(a_{t} \mid s_{t}\right)} $$, so $$ r\left(\theta_{\text {old }}\right)=1 $$. TRPO maximises a "surrogate" objective:
+
+$$
+L^{C P I}(\theta)=\hat{\mathbb{E}}_{t}\left[\frac{\pi_{\theta}\left(a_{t} \mid s_{t}\right)}{\pi_{\theta_{\mathrm{old}}}\left(a_{t} \mid s_{t}\right)} \hat{A}_{t}\right]=\hat{\mathbb{E}}_{t}\left[r_{t}(\theta) \hat{A}_{t}\right]
+$$
+
+The superscript $$ CPI $$ refers to the Conservative Policy Iteration. Without a constraint, maximisation of the surrogate objective would lead to an excessively large policy update. To penalise changes to the policy that move $$ r_{t}(\theta) $$ away from $$ 1 $$, we can formulate a new main objective:
+
+$$
+L^{C L I P}(\theta)=\hat{E}_{t}\left[\min \left(r_{t}(\theta) \hat{A}_{t}, \operatorname{clip}\left(r_{t}(\theta), 1-\epsilon, 1+\epsilon\right) \hat{A}_{t}\right)\right]
+$$
+
+The objective function that PPO optimises is an expectation operator $$ \hat{E}_{t} $$, so this means that we're going to compute this over batches of trajectories. This expectation operator is taken over the minimum of two terms:
+
+- $r_{t}(\theta) \hat{A}_{t}$ — This is the default objective for normal policy gradients which pushes the policy towards actions that yield a high positive advantage over the baseline.
+- $$ \operatorname{clip}\left(r_{t}(\theta), 1-\epsilon, 1+\epsilon\right) \hat{A}_{t} $$ — Very similar to the first term, but contains a truncated version of $r_{t}(\theta)$ by applying a clipping operation between $1-\epsilon$ and $1+\epsilon,$ where epsilon is usually something like $$ 0.2 $$.
+
+Note that the advantage estimate can either be positive or negative and this changes the effect of the $$ \min $$ operator. The plot below (left) shows one term i.e., a single time-step of the surrogate function $$ L^{CLIP} $$ (the loss function) as a function of the probability ratio $$ r $$, for positive advantages, that is, our actions yielded better than expected return.
+
+{% assign imgs = "../../assets/images/ppoplot.png," | split: ',' %}
+{% include image.html images=imgs maxwidth="600px" caption="Plot of a single time-step of the surrogate function as a function of the probability ratio" %}<br class="img">
+
+Notice how the loss function flattens out when $$ r $$ gets too high, and this happens when the action is a lot more likely under the current policy than it was under the old policy. In this case, we don't want to overdo the action update too much, and so the objective function gets clipped here to limit the effect of the gradient update.
+
+If the action had an estimated negative value (plot on the right), the objective flattens when $$ r $$ goes near $$ 0 $$, and this corresponds to actions that are much less likely now than in the older policy, and it will have the same effect of not overdoing a similar update which might otherwise reduce these action probabilities to $$ 0 $$.
+
+The objective function only ends up in the downsloping region when the last gradient step made the selected action a lot more probable, so $$ r $$ is big while also making our policy worse since the advantage is negative here.
+
+If this is the case, we would want to undo the last gradient step, and the objective function in PPO allows us to do just that. The function is negative there, so the gradient will tell us to walk the other direction and make the action less probable by an amount proportional to how much we changed it. Also notice, that it's the only region where the clipped part of the objective function has a lower value than the clipped version and thus gets returned by the minimization operator.
+
+# The Algorithm
+
+If a neural network architecture shares parameters between the policy and value function (a state-value function in this case), we must use a loss function that combines the policy surrogate and a value function error term. This objective can be further augmented by adding an entropy bonus to ensure sufficient exploration. Combining these terms, we obtain the following objective, which is (approximately) maximised each iteration.
+
+$$
+L_{t}^{C L I P+V F+S}(\theta)=\hat{E}_{t}\left[L_{t}^{C L I P}(\theta)-c_{1} L_{t}^{V F}(\theta)+c_{2} S\left[\pi_{\theta}\right]\left(s_{t}\right)\right]
+$$
+
+$$ c_{1} $$ and $$ c_{2} $$ are coefficients, and $$ S $$ denotes an entropy bonus, and $$ L_{t}^{V F} $$ is a squared-error loss of $$ \left(V_{\theta}\left(s_{t}\right)-V_{t}^{\mathrm{targ}}\right)^{2} $$, where $$ V_{\theta}\left(s_{t}\right) $$ is the state-value at time $$ t $$ and $$ V_{t}^{\mathrm{targ}} $$ is the target state-value at time $$ t $$. 
+
+PPO has two alternating threads. Each iteration, each of (parallel) actors collect time steps of data. Then we construct the surrogate loss on these  time steps of data and optimise it with mini-batch SGD (or usually for better performance, Adam), for $$ K $$ epochs.
+
+# Performance
+
+The team at OpenAI compared PPO (with the clipped surrogate objective) to several other methods from the literature, which are considered to be effective for continuous problems. They compared PPO againts tuned implementations of the following algorithms: Trust Region Policy Optimization (TRPO), Cross-Entropy Method (CEM), Vanilla Policy Gradient with Adaptive stepsize, A2C, A2C with trust region. 
+
+A2C stands for advantage actor critic, and is a synchronous version of A3C, which they found to have the same or better performance than the asynchronous version. For PPO, they set the hyperparameter $$ \epsilon=0.2 $$.
+
+{% assign imgs = "../../assets/images/ppocomp.png," | split: ',' %}
+{% include image.html images=imgs maxwidth="100%" caption="Comparison of several algorithms on several MuJoCo environments, training for one million timesteps" %}<br class="img">
+
+In conclusion, we see that PPO outperforms the previous methods on almost all the continuous control environments and has the stability and reliability of trust-region methods but is much simpler to implement, requiring only a few lines of code change to a vanilla policy gradient implementation, applicable in more general settings for example, when using a joint architecture for the policy and value function, and has better overall performance.
