@@ -22,6 +22,21 @@ profile: true
 
 <div class="media-item">
 	<div class="img">
+		<img src="{{ site.baseurl }}/assets/images/awspr.jpg" alt="AWS Ad" />
+	</div>
+	<div class="info">
+		<h1>Advocate for the AWS Educate Program</h1>
+		<p class="desc">
+			This video shot and advertised by Amazon Web Services reveals how students like me have benefitted from the AWS Educate program. My mentor, Mr. Teo Shin Jen, introduced me to this unique program that offers various cloud career pathways to learn the top cloud skills in leading cloud careers. From Machine Learning Scientist to Application Developer, these courses have helped me understand the AWS cloud ecosystem and its real-world application. 
+		</p>
+		<ul>
+			<li class="link_button"><a href="https://youtu.be/kwQlEdaXNcc" target="blank">Video</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="media-item">
+	<div class="img">
 		<img src="{{ site.baseurl }}/assets/images/shin.jpg" alt="News" />
 	</div>
 	<div class="info">
