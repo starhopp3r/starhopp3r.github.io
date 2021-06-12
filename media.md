@@ -42,7 +42,7 @@ profile: true
 	<div class="info">
 		<h1>Cultivating a Growth Mindset</h1>
 		<p class="desc">
-			This article by The New Paper explains how my mentor: Mr Teo Shin Jen's Teach, Coach and Mentor (TCM) framework has helped mentees like me realise my ideas and impact the society. I've been advised by him on various projects ranging from hackathons to my Final Year Project. Read the article to know more about his TCM framework and how students like me have benefitted from it. 
+			This article by The New Paper explains how my mentor: Mr. Teo Shin Jen's Teach, Coach and Mentor (TCM) framework has helped mentees like me realise my ideas and impact the society. I've been advised by him on various projects ranging from hackathons to my Final Year Project. Read the article to know more about his TCM framework and how students like me have benefitted from it. 
 		</p>
 		<ul>
 			<li class="link_button"><a href="https://www.tnp.sg/news/singapore/cultivating-growth-mindset" target="blank">The New Paper</a></li>
