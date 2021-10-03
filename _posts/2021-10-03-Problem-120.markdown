@@ -1,0 +1,106 @@
+---
+layout: post
+title: "Problem #120"
+description: "Measuring voltage across a pure self inductor and a resistor"
+date: 2021-10-03 10:27:55 +0800
+categories: Circuits
+---
+
+Yes, it has been a really long time since I've updated my blog, so here's something that I thought would be worth sharing. A few days ago, Dr. Walter Lewin, a former professor of physics at the Massachusetts Institute of Technology, posted an interesting problem on his YouTube channel. This problem is the 120th problem he has posted on his channel, and therefore we shall call this problem #120 for brevity.
+
+If you watch the [video on problem #120](https://youtu.be/YV9mHiJ_CDg), he connects a battery, a switch, a pure inductor with no ohmic resistance, and a resistor in a series arrangement, as shown below. He then closes the switch at $t = 0$ and measures the voltage across the inductor at some unknown time, and the voltage is +2.360 V. Now, the question is: what is the voltage across the resistor ($V_1$) when the voltage across the inductor ($V_2$) is +2.360 V?
+
+{% assign imgs = "../../assets/images/prob120.png," | split: ',' %}
+{% include image.html images=imgs maxwidth="100%" caption="Problem #120" %}<br class="img">
+
+Before working on this problem, I scrolled through the comments section below his video and noticed that most of the comments mentioned +9.640 to be the correct answer. Some viewers even said that there is a voltage phase difference between the inductor and resistor, which was a bit ridiculous given that we're dealing with a DC circuit and not an AC circuit. So how do we solve this problem? Can we use Kirchoff's Voltage Law (KVL)? Yes. But there is a catch. What if we were also asked to find the time at which Dr. Lewin took these measurements? Will KVL still help? Well, I would say no.
+
+Most people got +9.640 as the answer because they used KVL correctly for the first half of the solution but failed to notice the polarity of the voltmeter's probes, which Dr. Lewin connected to the resistor in reverse polarity of the implied polarity of the resistor. Therefore by KVL, which is just a special case of Faraday's law:
+
+$$ \oint \vec{E} \cdot d \vec{l}=0 $$
+
+$$ V_{2}-V_{1}-V=0 $$
+
+$$ V_{1}=-9.640 \ V$$
+
+Is this the correct answer? Yes. Are we satisfied? No. We still don't know precisely how many seconds (or milliseconds) after closing the switch did Dr. Lewin make these measurements. Let's solve the problem by applying KVL to the circuit.
+
+$$ V_{S}=L \frac{d I}{d t}+I R $$
+
+Where $V_S$ is the supply voltage of the battery, $L$ is the inductance of the pure inductor, $I$ is the current flowing through the series circuit, and $R$ is the resistance of the resistor.
+
+$$ \frac{d I}{d t}=-\frac{R}{L}\left(I-\frac{V_{S}}{R}\right) $$
+
+$$ \int_{0}^{t} \frac{1}{I-\frac{V_{S}}{R}} \ dI=\int_{0}^{t}-\frac{R}{L} \ dt $$
+
+$$ \ln I(t)-\frac{V_{S}}{R}-\ln I(0)-\frac{V_{S}}{R}=-\frac{R}{L} t $$
+
+$$ \ln \frac{I(t)-\frac{V_{S}}{R}}{I(0)-\frac{V_{S}}{R}}=-\frac{R}{L} t $$
+
+$$ e^{\ln \frac{I(t)-\frac{V_{S}}{R}}{I(0)-\frac{V_{S}}{R}}}=e^{-\frac{R}{L}t} $$
+
+$$ \frac{I(t)-\frac{V_{S}}{R}}{I(0)-\frac{V_{S}}{R}} = e^{-\frac{R}{L}t} $$
+
+$$ I(t)=\frac{V_{S}}{R}+\left[I(0)-\frac{V_{S}}{R}\right] e^{-\frac{R}{L}t} $$
+
+$$ \tau = \frac{L}{R} $$
+
+$$ I(t)=\frac{V_{S}}{R}+\left[I(0)-\frac{V_{S}}{R}\right] e^{-\frac{t}{\tau}} $$
+
+$$ I(t)=\frac{V_{S}}{R}+\left[I_0-\frac{V_{S}}{R}\right] e^{-\frac{t}{\tau}} $$
+
+The initial current $I_0$ is zero amperes, so the equation simplifies to:
+
+$$ I(t)=\frac{V_{S}}{R}-\frac{V_{S}}{R}e^{-\frac{t}{\tau}} $$
+
+Multiplying both sides of the equation by $R$ and rearranging the equation, we get:
+
+$$ V_{S}-V_{S}e^{-\frac{t}{\tau}} - I(t)R = 0 $$
+
+Now, we instantly identify the voltage across the inductor at some time to be
+
+$$ V_L = V_{S}e^{-\frac{t}{\tau}}$$
+
+Yes, I have derived the whole equation for you. You're welcome. Now, coming back to the problem, the voltage across the inductor at some time, $t$, measured by the voltmeter, is
+
+$$ V_{1}=Ve^{-\frac{R}{L} t} $$
+
+Where $V$ is the battery's supply voltage (I'm sticking to $V$ to ensure consistency with the Faraday's Law version of the solution). The voltage across the inductor is measured to be +2.360 V. Therefore, Dr. Lewin made the measurements at precisely
+
+$$
+\begin{align}
+	t&=-\frac{L}{R} \ln \frac{V_{1}}{V}\\
+	&=-\frac{0.01 \ \text{H}}{10 \ \Omega} \ln \frac{2.360 \ \text{V}}{12 \ \text{V}}\\
+	&=0.001626245031 \ \text{seconds}
+\end{align}
+$$
+
+The voltage across the resistor, $V_1$, can be calculated using Ohm's law by taking the product of the resistance of the resistor and the current, $I$, which is flowing through the series circuit in a clockwise direction (implied).
+
+$$ V_{1}= R I $$
+
+The current, $I$, flowing through the circuit is
+
+$$ I=\frac{V}{R}\left(1-e^{-\frac{R}{L} t}\right) $$
+
+Therefore, the voltage across the resistor is
+
+$$ V_{1}=R\left[\frac{V}{R}\left(1-e^{-\frac{R}{L} t}\right)\right] $$
+
+$$
+\begin{align}
+V_{1} &=V\left(1-e^{-\frac{R}{L} t}\right) \\
+&=12 \ V \cdot \left(1-e^{-\frac{10 \ \Omega}{0.01 \ \text{H}}(0.001626245031 \ \text{s})}\right) \\
+&=9.6400 \ V
+\end{align}
+$$
+
+Note that the positive terminal of the voltmeter is connected to the negative terminal (assigned) of the resistor. Therefore, the voltage across the resistor as measured by the voltmeter is -9.640 V.
+
+By simulating the circuit on a readily available online circuit simulator like [CircuitLab](https://www.circuitlab.com), I was able to verify that at
+$t = 0.001626245031$ seconds, the voltage across the inductor was +2.360 volts ($V_2$), and the voltage across the resistor was -9.640 volts ($V_1$). Dr. Lewin posted the [solution to this problem](https://youtu.be/PMvaTtj7GAU) only a few hours before I started writing this blog post, so I had to verify the solution myself.
+
+{% assign imgs = "../../assets/images/Vt_graph.png," | split: ',' %}
+{% include image.html images=imgs maxwidth="100%" caption="The voltage vs time graph of the RL circuit." %}<br class="img">
+
+Now, if you were to look at the voltage reading for both the resistor (yellow line) and the inductor (blue line) at 1.600 ms, we can verify that the voltage across the inductor was $+2.360$ volts ($V_2$), and the voltage across the resistor was $-9.6400$ volts ($V_1$). Quod Erat Demonstrandum.
