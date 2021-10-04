@@ -33,7 +33,7 @@ $$ \frac{d I}{d t}=-\frac{R}{L}\left(I-\frac{V_{S}}{R}\right) $$
 
 $$ \int_{0}^{t} \frac{1}{I-\frac{V_{S}}{R}} \ dI=\int_{0}^{t}-\frac{R}{L} \ dt $$
 
-$$ \ln I(t)-\frac{V_{S}}{R}-\ln I(0)-\frac{V_{S}}{R}=-\frac{R}{L} t $$
+$$ \ln \left(I(t)-\frac{V_{S}}{R}\right)-\ln \left(I(0)-\frac{V_{S}}{R}\right)=-\frac{R}{L} t $$
 
 $$ \ln \frac{I(t)-\frac{V_{S}}{R}}{I(0)-\frac{V_{S}}{R}}=-\frac{R}{L} t $$
 
