@@ -65,7 +65,7 @@ Yes, I have derived the whole equation for you. You're welcome. Now, coming back
 
 $$ V_{1}=Ve^{-\frac{R}{L} t} $$
 
-Where $V$ is the battery's supply voltage (I'm sticking to $V$ to ensure consistency with the Faraday's Law version of the solution). The voltage across the inductor is measured to be +2.360 V. Therefore, Dr. Lewin made the measurements at precisely
+Where $V$ is the battery's supply voltage (I'm sticking to $V$ to ensure consistency with the Faraday's Law version of the solution). The voltage across the inductor is +2.360 V. Therefore, Dr. Lewin made the measurements at precisely
 
 $$
 \begin{align}
