@@ -135,7 +135,7 @@ sudo apt-get install -y python-rosdep python-rosinstall-generator python-wstool 
 
 Here, the dependencies include ROS-specific tools (`rosdep`, `rosintall_generator`, and `ws_tool`) and some essential build tools like `make` and `cmake`.
 
-# Step 6: Set up ROS Dependency Sources
+# Step 6: Set Up ROS Dependency Sources
 
 First, we initialize `rosdep`, which is a ROS tool for installing dependencies:
 
