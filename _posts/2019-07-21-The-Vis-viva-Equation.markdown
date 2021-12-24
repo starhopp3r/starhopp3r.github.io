@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Vis-viva Equation"
-description: "It's all about changing orbits"
+description: "Let's change orbits"
 date: 2019-07-21 10:27:55 +0800
 categories: Space Exploration
 ---
@@ -100,7 +100,7 @@ $$ \mathrm{\Delta v} = \sqrt{\frac{\mu}{r_{2}}}\left(1-\sqrt{\frac{2 r_{1}}{r_{1
 Now, let's fire up Kerbal Space Program and put the vis-viva equation to the test. I used one of Kerbal Space Program's stock rockets: Kerbal X to simulate the Hohmann transfer. According to Kerbal Space Program, "The Kerbal X is one of the most successful rockets that can be ordered from a catalog. Despite the original design having been meant for a plastic model, it's proved itself quite dependable as a full-sized craft. The X is capable of achieving orbit around Kerbin and even features a very optimistic set of landing legs on its upper stage."
 
 {% assign imgs = "../../assets/images/kerbalx.png," | split: ',' %}
-{% include image.html images=imgs maxwidth="100%" caption="Kerbal X blueprint." %}<br class="img">
+{% include image.html images=imgs maxwidth="100%" caption="Kerbal X Blueprint" %}<br class="img">
 
 
 Kerbal Space Program's wiki says: "The first stage's central engine and relative fuel tank has 2973 m/s of Δv, not mentioning the radial ring of boosters which has 1063 m/s. This sums up to about 4036 m/s, enough to make orbit (3500 m/s) with some to spare, making the Kerbal X launch vehicle a suitable option for orbiting small-to-medium payloads. The maximum payload to Kerbin low orbit of the unmodified Kerbal X launch vehicle is slightly less than 24 tons.

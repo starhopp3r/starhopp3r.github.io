@@ -7,7 +7,7 @@ categories: Space Exploration
 ---
 
 {% assign imgs = "../../assets/images/fhengine.jpg," | split: ',' %}
-{% include image.html images=imgs maxwidth="100%" caption="SpaceX's Falcon Heavy exhaust plumes [Arabsat-6A Mission]." %}<br class="img">
+{% include image.html images=imgs maxwidth="100%" caption="SpaceX's Falcon Heavy [Source: SpaceX]" %}<br class="img">
 
 The first gunpowder-powered rockets were invented centuries ago, and since then rocket propulsion technology has evolved to the point where we now use electric propulsion to drive our space probes to the edge of our solar system. The ideal rocket equation and Newton's Laws of Motion, among other things (aerodynamics, etc.), dictate the performance of a rocket. The ideal rocket equation or the Tsiolkovsky rocket equation is fundamentally derived from Newton's laws of motion and the conservation of momentum. Before we derive the ideal rocket equation ourselves, let's revisit Newton's Laws of Motion and the law of conservation of momentum.
 
@@ -135,6 +135,6 @@ $$ \mathrm{\frac{m_{prop}}{m_{i}}=1-e^{-2.25}=0.89} $$
 Therefore, the higher the exhaust velocity, the lower the propellant fraction and higher the inert fraction. With a higher inert fraction, we are able to carry a heavier payload into orbit and keep the rocket structurally sound. This is why companies like SpaceX are constantly improving the performance of their rocket engines in order to carry heavier payloads to Low-Earth Orbit, the Moon and eventually to Mars.
 
 {% assign imgs = "../../assets/images/raptor.jpg," | split: ',' %}
-{% include image.html images=imgs maxwidth="100%" caption="SpaceX’s subscale Raptor engine has completed more than 1200 seconds of testing in less than two years." %}<br class="img">
+{% include image.html images=imgs maxwidth="100%" caption="SpaceX’s Subscale Raptor Engine [Source: SpaceX]" %}<br class="img">
 
 In conclusion, the ideal rocket equation puts a limit on how much of the fraction of the mass of the rocket can be devoted to the actual structure and payload. In other words, we want to make rockets as light as possible. Splitting a rocket into sections known as stages and discarding them once the propellant has been expended is the best way to overcome the limitations put forth by the ideal rocket equation.

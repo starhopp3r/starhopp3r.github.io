@@ -11,7 +11,7 @@ Yes, it has been a really long time since I've updated my blog, so here's someth
 If you watch the [video on problem #120](https://youtu.be/YV9mHiJ_CDg), he connects a battery, a switch, a pure inductor with no ohmic resistance, and a resistor in a series arrangement, as shown below. He then closes the switch at $t = 0$ and measures the voltage across the inductor at some unknown time, and the voltage is +2.360 V. Now, the question is: what is the voltage across the resistor ($V_1$) when the voltage across the inductor ($V_2$) is +2.360 V?
 
 {% assign imgs = "../../assets/images/prob120.png," | split: ',' %}
-{% include image.html images=imgs maxwidth="100%" caption="Problem #120" %}<br class="img">
+{% include image.html images=imgs maxwidth="100%" caption="Problem #120 [Source: Dr. Lewin's video]" %}<br class="img">
 
 Before working on this problem, I scrolled through the comments section below his video and noticed that most of the comments mentioned +9.640 to be the correct answer. Some viewers even said that there is a voltage phase difference between the inductor and resistor, which was a bit ridiculous given that we're dealing with a DC circuit and not an AC circuit. So how do we solve this problem? Can we use Kirchoff's Voltage Law (KVL)? Yes. But there is a catch. What if we were also asked to find the time at which Dr. Lewin took these measurements? Will KVL still help? Well, I would say no.
 

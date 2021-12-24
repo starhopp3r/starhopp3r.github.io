@@ -137,6 +137,18 @@ br {
 
 }
 
+/* .profile-robot {
+	width: 100%;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.profile-robot::after {
+  content: "\1F916";
+  font-size: 100pt;
+  display: block;
+} */
+
 nav.main-nav {
 	padding: 20px 20px 0;
 
