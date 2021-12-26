@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Finding the YellowLeaf"
+title: "Finding the Yellow Leaf"
 description: "Identifying the yellow leaf syndrome in banana plants"
 date: 2021-02-27 10:27:55 +0800
 categories: technology
@@ -64,7 +64,7 @@ The sector of plants affected is shown by the edge-detection camera deployed tak
 Finally, the spreading disease velocity can also be estimated by observing the past data, more effectively predicting an effective quarantine area.
 
 {% assign imgs = "../../assets/images/agv.png," | split: ',' %}
-{% include image.html images=imgs maxwidth="100%" caption="Edge detection camera powered by Intel® Movidius™ Neural Compute Stick mounted on an AVG" %}<br class="img">
+{% include image.html images=imgs maxwidth="100%" caption="Edge detection camera powered by Intel® Movidius™ Neural Compute Stick mounted on an AGV" %}<br class="img">
 
 The second part of the solution is the YellowLeaf edge device. This is an add-on to any existing Unmanned Aerial Vehicles (UAVs) or Automated Guided Vehicles (AGVs) suitable for the situation. With the Intel® Movidius™ Neural Compute Stick, the edge device can perform Machine Vision to identify if a banana plant is infected with the Panama disease. We have trained a model that is also deployed alongside the Intel® Movidius™ Neural Compute Stick, which allows the edge-to-edge detection to happen. These data are then sent to the user, allowing real-time feedback from the edge-detection camera.
 
