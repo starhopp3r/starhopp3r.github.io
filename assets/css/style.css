@@ -409,9 +409,9 @@ thead th,th {
 	text-align: left;
 	padding: 10px 15px;
 	height: 20px;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: bold;
-	color: #444;
+	color: #000;
 	border-bottom: 1px solid #dadadc;
 	cursor: default;
 	white-space: nowrap;
