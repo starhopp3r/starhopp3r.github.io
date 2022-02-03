@@ -34,9 +34,9 @@ The LiDAR uses a left-hand coordinate system. The front side of the sensor is de
 
 The LiDAR measures the distance to a certain point in space relative to its origin. If we want to know a point's absolute coordinates in 2D space, we need to perform some simple trigonometry. Unlike the unit circle, the ray from the origin $$(0, \ 0)$$ to the $$(x, \ y)$$ coordinates of a point makes an angle $$\theta$$ from the positive x-axis, where clockwise rotation is positive. Therefore, we modify the equation of the $y$ coordinate by adding a minus sign to accommodate for the change in orientation of the y-axis.
 
-$$x = \text{distance} * \sin \theta$$
+$$x = \text{distance} * \cos \theta$$
 
-$$y = - \ \text{distance} * \cos \theta$$
+$$y = - \ \text{distance} * \sin \theta$$
 
 We can determine the absolute position of any point in 2D space with these equations, given the distance to the point measured by the LiDAR. With this information, we can determine how far away an obstacle is from the robot with high certainty and code a reasonably simple but robust obstacle avoiding avoidance algorithm. I rotated and moved my LiDAR around to see if it affected how the points were represented in 2D space. The graphs below show LiDAR scans of my room in different orientations.
 
@@ -100,7 +100,7 @@ I used a GY-521 MPU6050 6 DOF IMU sensor that communicates with the Raspberry Pi
 
 I programmed the robot to move forward, turn left, turn right, and reverse for 5 seconds, measured the linear acceleration and rotation rate on all three axes, and plotted it to gain intuition about these measurements. I concluded that the relative angle between an initial position at time $t_1$ and a final position at time $t_2$ is 
 
-$$\Delta \theta=\int_{t_{1}}^{t_{2}} \omega \ dt \approx \frac{\Delta t}{2} \sum_{k=1}^{N}\omega_{k-1}+\omega_{k}$$
+$$\Delta \theta=\int_{t_{1}}^{t_{2}} \omega \ dt \approx \sum_{k=1}^{N} \frac{\omega_{k-1}+\omega_{k}}{2} \Delta t_{k}$$
 
 Measuring the relative angle between two positions allowed me to use a Proportional–Integral–Derivative (PID) controller to control (I'll write a separate blog post on this) the robot's heading.
 
