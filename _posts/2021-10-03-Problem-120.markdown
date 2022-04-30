@@ -103,4 +103,4 @@ $t = 0.001626245031$ seconds, the voltage across the inductor was +2.360 volts (
 {% assign imgs = "../../assets/images/Vt_graph.png," | split: ',' %}
 {% include image.html images=imgs maxwidth="100%" caption="The voltage vs time graph of the RL circuit." %}<br class="img">
 
-Now, if you were to look at the voltage reading for both the resistor (yellow line) and the inductor (blue line) at 1.600 ms, we can verify that the voltage across the inductor was $+2.360$ volts ($V_2$), and the voltage across the resistor was $-9.6400$ volts ($V_1$). Quod Erat Demonstrandum.
+Now, if you were to look at the voltage reading for both the resistor (yellow line) and the inductor (blue line) at 1.600 ms, we can verify that the voltage across the inductor was $+2.360$ volts ($V_2$), and the voltage across the resistor was $-9.6400$ volts ($V_1$). QED.
