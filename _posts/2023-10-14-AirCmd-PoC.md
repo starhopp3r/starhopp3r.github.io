@@ -68,4 +68,4 @@ The PowerShell program executed by the AirCmd Tx transceiver stands as a highly 
 
 The presented proof of concept has its limitations, reflecting certain imperfections inherent in the implementation phase. A more refined design could potentially address these limitations. One notable issue is AirCmd's susceptibility to the constraints posed by LoRa technology, particularly in terms of data packet size and throughput, given its reliance on LoRa for data transfers. However, it's crucial to remember the primary objective behind the creation of AirCmd: to demonstrate the feasibility of establishing networkless shells, and to shed light on how air-gapped systems might be compromised. Through this endeavor, I aimed to provide a tangible illustration of how these security challenges can manifest, while also offering a platform for exploring potential solutions or further investigations into overcoming the identified limitations.
 
-The souce code for this proof of concept is available [here](https://github.com/Malware-Mystic/AirCmd/).
+The source code for this proof of concept is available [here](https://github.com/Malware-Mystic/AirCmd/).
