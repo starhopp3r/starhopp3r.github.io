@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines }}">
+  <title>{% if page.title %}{{ page.title | escape }} · {% endif %}{{ site.title }}</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/favicons/apple-touch-icon.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicons/favicon-32x32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicons/favicon-16x16.png' | relative_url }}">
+  <link rel="manifest" href="{{ '/assets/img/favicons/site.webmanifest' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/img/favicons/favicon.ico' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body class="page page-{{ page.layout | default: 'default' }}{% if page.url == '/about' %} page-about{% endif %}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand">
+        <a href="{{ '/' | relative_url }}" class="brand-title">{{ site.title }}</a>
+        <span class="brand-subtitle">{{ site.description }}</span>
+      </div>
+      <nav class="site-nav">
+        <ul>
+          {% for item in site.navigation %}
+            <li>
+              <a href="{{ item.url | relative_url }}" {% if page.url == item.url %}class="active"{% endif %}>{{ item.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="page-content">
+      {{ content }}
+    </main>
+
+    <footer class="site-footer">
+      <p class="footnote">© {{ site.title }} {{ site.time | date: '%Y' }}</p>
+    </footer>
+  </div>
+</body>
+</html>

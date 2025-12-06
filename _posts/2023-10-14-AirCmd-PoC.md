@@ -1,7 +1,5 @@
 ---
 title: "A Proof of Concept for Setting Up a Networkless Shell"
-date: 2023-10-14 06:40:55 +0800
-tags: [AirCmd, Proof of Concept (PoC), networkless, shell]
 ---
 
 A shell, in computing, refers to a user interface that provides access to an operating system's services. It acts as an intermediary between the user and the operating system, allowing the user to execute commands, run scripts, and manage files and processes. Shells can be graphical (GUI) or command-line (CLI) based, with the latter being text-driven, where users input commands in text form and receive text responses. In a cybersecurity context, a shell refers to a command interface that attackers establish on a compromised system to remotely execute commands and control the system, often achieved through scripts or programs designed to exploit vulnerabilities in the target system. When discussing shells in the context of network security, two common types are mentioned: bind shells and reverse shells.

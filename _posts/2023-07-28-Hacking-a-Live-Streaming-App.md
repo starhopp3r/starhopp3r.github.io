@@ -1,11 +1,8 @@
 ---
 title: Hacking a Live Streaming App
-date:   2023-07-28 10:27:55 +0800
-tags: [Wireshark, Android, protocols, packet sniffing]
 ---
 
 > This blog post, originally written in 2019, was migrated from my old blog site.
-{: .prompt-info }
 
 The ICC Cricket World Cup concluded a few weeks ago, and it was watched by approximately 2.6 billion people worldwide. This staggering viewership makes it the most-watched cricket competition as of 2019. The advent of on-demand mobile media applications such as Netflix and YouTube is increasingly attracting people like me away from traditional television sets with cable or fiber connections, shifting the dependence onto native or web apps for media content.
 

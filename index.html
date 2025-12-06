@@ -1,4 +1,33 @@
 ---
-layout: home
-# Index page
+layout: default
+title: Home
 ---
+
+<section class="feed">
+  <p class="feed-title">Posts</p>
+  <div class="post-stack">
+    {% assign collection = paginator.posts | default: site.posts %}
+    {% for post in collection %}
+      <article class="post-card long">
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
+        <p class="post-meta">{{ post.date | date: "%-d %B %Y" }}</p>
+      </article>
+    {% endfor %}
+  </div>
+  {% if paginator and paginator.total_pages > 1 %}
+    <nav class="pagination" aria-label="Pagination">
+      {% if paginator.previous_page %}
+        <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">&larr; Newer</a>
+      {% else %}
+        <span class="page-link disabled">&larr; Newer</span>
+      {% endif %}
+      <span class="page-info">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+      {% if paginator.next_page %}
+        <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">Older &rarr;</a>
+      {% else %}
+        <span class="page-link disabled">Older &rarr;</span>
+      {% endif %}
+    </nav>
+  {% endif %}
+</section>
