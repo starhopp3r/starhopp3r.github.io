@@ -111,6 +111,7 @@ a:hover {
 
 .page-content {
   margin-top: 20px;
+  overflow-x: hidden;
 }
 
 .page-about .page-content {
@@ -348,7 +349,20 @@ a:hover {
 
 .page-content img {
   width: 100%;
+  max-width: 100%;
   height: auto;
+}
+
+.page-content video,
+.page-content svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.page-content iframe,
+.page-content embed,
+.page-content object {
+  max-width: 100%;
 }
 
 .post-body a {
@@ -403,6 +417,7 @@ a:hover {
 
 .post-body .table-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin: 20px 0 24px;
@@ -410,6 +425,7 @@ a:hover {
 
 .post-body table {
   width: 100%;
+  table-layout: auto;
   border-collapse: collapse;
   border: 1px solid var(--border);
   background: var(--bg);
@@ -450,6 +466,29 @@ a:hover {
 
 .post-body tbody tr:hover {
   background: rgba(255, 255, 255, 0.06);
+}
+
+.post-body mjx-container {
+  max-width: 100%;
+}
+
+.post-body mjx-container[display="true"] {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 6px;
+}
+
+.post-body mjx-container[display="false"] {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: middle;
+}
+
+.post-body .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .post-body blockquote {
@@ -779,6 +818,10 @@ pre code {
 }
 
 @media (max-width: 720px) {
+  .page-shell {
+    padding: 24px 16px 60px;
+  }
+
   .site-header {
     flex-direction: column;
     align-items: flex-start;
@@ -800,5 +843,55 @@ pre code {
   .post,
   .hero {
     padding: 24px 20px;
+  }
+
+  .post-title,
+  .post-body h1 {
+    font-size: clamp(28px, 6vw, 34px);
+  }
+
+  .post-body h2 {
+    font-size: clamp(24px, 5.2vw, 30px);
+  }
+
+  .post-body h3 {
+    font-size: clamp(20px, 4.4vw, 24px);
+  }
+
+  .post-body h4 {
+    font-size: 19px;
+  }
+
+  .post-body h5 {
+    font-size: 17px;
+  }
+
+  .post-body h6 {
+    font-size: 15px;
+  }
+
+  .hero h1 {
+    font-size: clamp(26px, 5.8vw, 34px);
+  }
+
+  .post-body .table-wrap {
+    margin: 16px 0 20px;
+  }
+
+  .post-body th,
+  .post-body td {
+    padding: 10px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .post,
+  .hero {
+    padding: 20px 16px;
+  }
+
+  .post-body th,
+  .post-body td {
+    padding: 8px 8px;
   }
 }
