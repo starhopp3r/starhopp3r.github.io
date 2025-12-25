@@ -289,7 +289,7 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-family: "CMU Sans", "Helvetica Neue", sans-serif;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
 }
 
@@ -318,7 +318,7 @@ a:hover {
   margin: 0;
   color: var(--muted);
   font-family: "CMU Sans", "Helvetica Neue", sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 0.01em;
 }
 
@@ -336,7 +336,7 @@ a:hover {
 
 .post-title {
   margin: 4px 0 6px 0;
-  font-size: clamp(28px, 3vw, 38px);
+  font-size: clamp(32px, 3.2vw, 40px);
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
@@ -344,6 +344,11 @@ a:hover {
 .post-body {
   font-size: 17px;
   color: var(--text);
+}
+
+.page-content img {
+  width: 100%;
+  height: auto;
 }
 
 .post-body a {
@@ -358,19 +363,93 @@ a:hover {
   margin: 0 0 16px 0;
 }
 
+.post-body h1,
 .post-body h2,
-.post-body h3 {
+.post-body h3,
+.post-body h4,
+.post-body h5,
+.post-body h6 {
   margin: 26px 0 10px 0;
   line-height: 1.22;
   color: var(--text);
 }
 
+.post-body h1 {
+  font-size: clamp(32px, 3.2vw, 40px);
+}
+
 .post-body h2 {
-  font-size: 24px;
+  font-size: clamp(28px, 2.6vw, 34px);
 }
 
 .post-body h3 {
-  font-size: 20px;
+  font-size: clamp(23px, 2.1vw, 28px);
+}
+
+.post-body h4 {
+  font-size: 21px;
+}
+
+.post-body h5 {
+  font-size: 19px;
+  letter-spacing: 0.01em;
+}
+
+.post-body h6 {
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.post-body .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 20px 0 24px;
+}
+
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.post-body table caption {
+  text-align: left;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.post-body thead th {
+  text-align: left;
+  font-size: 1.1em;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.06);
+  border-top: none;
+}
+
+.post-body th,
+.post-body td {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.post-body td:empty {
+  border: none;
+  padding: 0;
+  background: var(--bg);
+}
+
+.post-body tbody tr:hover {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .post-body blockquote {
@@ -665,6 +744,38 @@ pre code {
   font-size: 13px;
   text-align: center;
   flex: 1;
+}
+
+@media (min-width: 1200px) {
+  .page-shell {
+    max-width: 1180px;
+  }
+
+  .post-body {
+    font-size: 18px;
+  }
+
+  .page-about .page-content {
+    font-size: 19px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .post-card p {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .page-shell {
+    max-width: 1240px;
+  }
+
+  .post-body {
+    font-size: 19px;
+  }
 }
 
 @media (max-width: 720px) {
