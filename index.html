@@ -18,15 +18,27 @@ title: Home
   {% if paginator and paginator.total_pages > 1 %}
     <nav class="pagination" aria-label="Pagination">
       {% if paginator.previous_page %}
-        <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">&larr; Newer</a>
+        <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Newer
+        </a>
       {% else %}
-        <span class="page-link disabled">&larr; Newer</span>
+        <span class="page-link disabled">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Newer
+        </span>
       {% endif %}
       <span class="page-info">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
       {% if paginator.next_page %}
-        <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">Older &rarr;</a>
+        <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">
+          Older
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
       {% else %}
-        <span class="page-link disabled">Older &rarr;</span>
+        <span class="page-link disabled">
+          Older
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </span>
       {% endif %}
     </nav>
   {% endif %}

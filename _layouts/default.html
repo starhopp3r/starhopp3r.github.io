@@ -10,7 +10,17 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicons/favicon-16x16.png' | relative_url }}">
   <link rel="manifest" href="{{ '/assets/img/favicons/site.webmanifest' | relative_url }}">
   <link rel="icon" href="{{ '/assets/img/favicons/favicon.ico' | relative_url }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme-preference') || 'dark';
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
   <script>
     window.MathJax = {
       tex: {
@@ -28,14 +38,25 @@
 </head>
 <body class="page page-{{ page.layout | default: 'default' }}{% if page.url == '/about' %} page-about{% endif %}">
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="nav-overlay" id="nav-overlay"></div>
   <div class="page-shell">
     <header class="site-header">
       <div class="brand">
         <a href="{{ '/' | relative_url }}" class="brand-title">{{ site.title }}</a>
         <span class="brand-subtitle">{{ site.description }}</span>
       </div>
-      <nav class="site-nav">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <nav class="site-nav" id="site-nav">
         <ul>
+          <li>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+              <span class="material-symbols-outlined theme-icon">dark_mode</span>
+            </button>
+          </li>
           {% for item in site.navigation %}
             <li>
               <a href="{{ item.url | relative_url }}" {% if page.url == item.url %}class="active"{% endif %}>{{ item.name }}</a>
