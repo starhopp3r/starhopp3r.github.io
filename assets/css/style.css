@@ -128,9 +128,17 @@
   color: #000000;
 }
 
+html {
+  background: var(--bg);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
 body {
   margin: 0;
   padding: 0;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
   background: var(--bg);
   background: var(--bg-gradient);
   background-attachment: fixed;
@@ -140,6 +148,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 a {
