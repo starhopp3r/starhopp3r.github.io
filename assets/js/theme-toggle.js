@@ -27,10 +27,10 @@
 
     const icon = toggle.querySelector('.theme-icon');
     if (theme === 'light') {
-      icon.textContent = 'light_mode';
+      icon.textContent = 'dark_mode';
       toggle.setAttribute('aria-label', 'Switch to dark mode');
     } else {
-      icon.textContent = 'dark_mode';
+      icon.textContent = 'light_mode';
       toggle.setAttribute('aria-label', 'Switch to light mode');
     }
   }
