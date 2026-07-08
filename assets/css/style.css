@@ -126,7 +126,6 @@ body {
 
 /* metadata & UI: small, quiet, normal case */
 .post-meta,
-.feed-year,
 .page-link,
 .page-info,
 .site-nav a,
@@ -135,7 +134,6 @@ body {
 }
 
 .post-meta,
-.feed-year,
 .page-info,
 .footnote {
   font-style: italic;
@@ -236,26 +234,8 @@ body {
 
 /* ---------------------------------------------------------- homepage index */
 
-.feed-year {
-  color: var(--ink-muted);
-  margin: 2.75rem 0 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.feed-year::after {
-  content: "";
-  flex: 1;
-  border-top: 1px solid var(--rule-soft);
-}
-
-.feed .feed-year:first-child {
-  margin-top: 0;
-}
-
 .toc-entry {
-  margin-bottom: 1.85rem;
+  margin-bottom: 2.25rem;
 }
 
 .toc-entry h2 {
@@ -552,6 +532,12 @@ samp {
   vertical-align: top;
 }
 
+/* table-merge.js wraps tables in .table-wrap; scroll wide tables inside it */
+.table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
 /* ------------------------------------------------------------------ embeds */
 
 .embed-youtube {
@@ -590,6 +576,7 @@ samp {
 @media (max-width: 540px) {
   .site-header {
     flex-direction: column;
+    align-items: flex-start;
     gap: 0.85rem;
   }
 

@@ -4,17 +4,11 @@ layout: default
 
 <section class="feed">
   {% assign collection = paginator.posts | default: site.posts %}
-  {% assign shown_year = "" %}
   {% for post in collection %}
-    {% assign year = post.date | date: "%Y" %}
-    {% if year != shown_year %}
-      <p class="feed-year">{{ year }}</p>
-      {% assign shown_year = year %}
-    {% endif %}
     <article class="toc-entry">
       <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
       <p class="toc-excerpt">{{ post.excerpt | strip_html | normalize_whitespace | truncate: 150 }}</p>
-      <p class="post-meta">{{ post.date | date: "%B %-d" }}</p>
+      <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
     </article>
   {% endfor %}
   {% if paginator and paginator.total_pages > 1 %}
