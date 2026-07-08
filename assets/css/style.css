@@ -88,7 +88,7 @@ body {
 .page-shell {
   max-width: 48rem;
   margin-inline: auto;
-  padding: clamp(1.5rem, 4vw, 4rem) 1.375rem clamp(2rem, 5vw, 4rem);
+  padding: 1.75rem 1.375rem clamp(2rem, 3vw, 2.75rem);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -124,7 +124,7 @@ body {
   left: 0.5rem;
 }
 
-/* letterspaced caps for metadata & UI */
+/* metadata & UI: small, quiet, normal case */
 .post-meta,
 .eyebrow,
 .feed-year,
@@ -132,11 +132,15 @@ body {
 .page-info,
 .site-nav a,
 .footnote {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-variant-numeric: lining-nums;
+  font-size: 0.875rem;
+}
+
+.post-meta,
+.eyebrow,
+.feed-year,
+.page-info,
+.footnote {
+  font-style: italic;
 }
 
 /* ------------------------------------------------------------------ header */
@@ -149,7 +153,7 @@ body {
   flex-wrap: wrap;
   padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--rule-soft);
-  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 2.5rem;
 }
 
 .brand {
@@ -319,7 +323,7 @@ body {
 /* -------------------------------------------------------------------- post */
 
 .post-header {
-  margin-bottom: clamp(2.25rem, 5vw, 3.25rem);
+  margin-bottom: 2.25rem;
   text-align: center;
 }
 
@@ -350,14 +354,12 @@ body {
   border-top: 1px solid var(--rule);
 }
 
-/* small-caps opening line; size/weight changes on ::first-line trigger a
-   Chrome glyph-spacing bug, so only caps + tracking */
-.post-body > p:first-of-type::first-line {
-  font-variant-caps: small-caps;
-  letter-spacing: 0.06em;
-}
-
 /* ------------------------------------------------------------------- prose */
+
+.post-body > :first-child,
+.page-prose > :first-child {
+  margin-top: 0;
+}
 
 .post-body h2,
 .page-prose h1,
@@ -540,10 +542,8 @@ samp {
 
 .post-body th,
 .page-prose th {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 550;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   text-align: left;
   color: var(--ink-muted);
   border-bottom: 1px solid var(--rule);
@@ -596,7 +596,7 @@ samp {
 /* ------------------------------------------------------------------ footer */
 
 .site-footer {
-  margin-top: clamp(3rem, 8vw, 5rem);
+  margin-top: 3rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--rule-soft);
   text-align: center;
