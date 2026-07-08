@@ -70,7 +70,7 @@
    viewport — ~17px on phones, ~20px at 1440, capped at 21px on big screens */
 html {
   height: 100%;
-  font-size: clamp(1.0625rem, 0.9375rem + 0.35vw, 1.3125rem);
+  font-size: clamp(1.0625rem, 0.9375rem + 0.35vw, 1.375rem);
 }
 
 body {
@@ -86,7 +86,7 @@ body {
 }
 
 .page-shell {
-  max-width: 42rem;
+  max-width: 48rem;
   margin-inline: auto;
   padding: clamp(1.5rem, 4vw, 4rem) 1.375rem clamp(2rem, 5vw, 4rem);
   display: flex;
