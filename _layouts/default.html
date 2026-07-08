@@ -44,7 +44,11 @@
         <a href="{{ '/' | relative_url }}" class="brand-title">{{ site.title }}</a>
         <span class="brand-subtitle">{{ site.description }}</span>
       </div>
-      <nav class="site-nav" aria-label="Site">
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Site">
         <ul>
           {% for item in site.navigation %}
             <li>

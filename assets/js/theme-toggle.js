@@ -14,10 +14,20 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('theme-toggle');
-    if (!toggle) return;
-    toggle.addEventListener('click', function() {
-      setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
-    });
+    if (toggle) {
+      toggle.addEventListener('click', function() {
+        setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+      });
+    }
+
+    const menu = document.getElementById('menu-toggle');
+    const nav = document.getElementById('site-nav');
+    if (menu && nav) {
+      menu.addEventListener('click', function() {
+        const open = nav.classList.toggle('open');
+        menu.setAttribute('aria-expanded', open);
+      });
+    }
   });
 
   // follow OS changes until the user explicitly picks a theme
