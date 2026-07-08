@@ -5,15 +5,10 @@ layout: default
 {% assign minutes = words | plus: 199 | divided_by: 200 %}
 <article class="post">
   <header class="post-header">
-    <p class="eyebrow">Essay</p>
     <h1 class="post-title">{{ page.title }}</h1>
     <p class="post-meta">{{ page.date | date: "%B %-d, %Y" }} · {{ minutes }} min read</p>
   </header>
   <div class="post-body">
     {{ content }}
   </div>
-  <footer class="post-end">
-    <p class="post-meta">{{ page.author }}</p>
-    <a class="post-meta" href="{{ '/' | relative_url }}">All essays</a>
-  </footer>
 </article>
