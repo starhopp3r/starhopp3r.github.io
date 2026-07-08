@@ -1,6 +1,6 @@
 title: "Nikhil Raghavendra"
 description: "Studying intelligence, artificial and otherwise"
-url: "https://starhopp3r.github.io"
+url: "https://nikhilr.io"
 baseurl: ""
 timezone: Asia/Singapore
 permalink: /posts/:title/
@@ -15,8 +15,13 @@ navigation:
   - name: About
     url: /about
 
+author: Nikhil Raghavendra
+
 plugins:
   - jekyll-paginate
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 defaults:
   - scope:
