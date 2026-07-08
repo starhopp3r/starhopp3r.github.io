@@ -145,7 +145,7 @@ body {
 
 .site-header {
   display: flex;
-  align-items: baseline;
+  align-items: last baseline;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
@@ -180,7 +180,7 @@ body {
 
 .site-nav ul {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 1.5rem;
   list-style: none;
   margin: 0;
@@ -215,6 +215,8 @@ body {
   color: var(--ink-muted);
   display: inline-flex;
   align-items: center;
+  /* sit the icon on the nav text baseline */
+  transform: translateY(0.47em);
 }
 
 .theme-toggle:hover {
