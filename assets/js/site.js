@@ -11,22 +11,6 @@
 
   const currentTheme = () => root.getAttribute("data-theme") || "light";
 
-  document.addEventListener(
-    "keydown",
-    (event) => {
-      if (event.key === "Tab") {
-        root.classList.add("keyboard-navigation");
-      }
-    },
-    true
-  );
-
-  document.addEventListener(
-    "pointerdown",
-    () => root.classList.remove("keyboard-navigation"),
-    true
-  );
-
   const updateThemeUI = (theme) => {
     if (themeToggle) {
       themeToggle.setAttribute(
