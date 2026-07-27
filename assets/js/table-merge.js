@@ -139,9 +139,18 @@
     }
 
     const wrapper = document.createElement("div");
+    const scrollHint = document.createElement("span");
+
     wrapper.className = "table-wrap";
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute("role", "region");
+    wrapper.setAttribute("aria-label", "Scrollable data table");
+    scrollHint.className = "table-scroll-hint";
+    scrollHint.setAttribute("aria-hidden", "true");
+    scrollHint.textContent = "Swipe to view all columns →";
+
     table.parentNode.insertBefore(wrapper, table);
-    wrapper.appendChild(table);
+    wrapper.append(scrollHint, table);
   };
 
   const run = () => {

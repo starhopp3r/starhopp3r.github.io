@@ -1,5 +1,10 @@
 ---
 title: "Sniffing My Neighbour's Phone Number"
+category: Privacy & Security
+cover: /assets/img/covers/airdrop-1440.webp
+cover_small: /assets/img/covers/airdrop-720.webp
+cover_alt: Apple's AirDrop interface on an iPhone
+dek: A practical investigation into the metadata AirDrop exposes and how a nearby observer can turn it into a phone number.
 ---
 
 > Please exercise caution and respect privacy laws when attempting to obtain personal information through unconventional means; this content is for educational and demonstrative purposes only.

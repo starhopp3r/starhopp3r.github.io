@@ -1,5 +1,11 @@
 ---
 title: "The Evolutionary Foundations of Mind Perception"
+category: Cognition & AI
+cover: /assets/img/covers/mind-perception-1280.webp
+cover_small: /assets/img/covers/mind-perception-720.webp
+cover_alt: An illustrated Cambrian seascape filled with early animal life
+dek: Why humans see minds everywhere, from rustling bushes to language models, and what evolution has to do with it.
+mathjax: true
 ---
 
 As I scroll through social media, read the news, or watch YouTube, I constantly come across posts and articles about Artificial Intelligence (AI), AI agents, and even Artificial General Intelligence (AGI). These technologies are often framed as forces that could reshape society or threaten it if they are misaligned or wielded by bad actors. This flood of anxious commentary made me pause and ask a simpler question: why are we so afraid of a computer program we built, especially when it still cannot replicate the full spectrum of human intelligence and intellectual agency?

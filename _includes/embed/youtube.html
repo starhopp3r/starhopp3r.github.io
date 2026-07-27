@@ -1,10 +1,11 @@
 {% assign youtube_id = include.id | default: include.video_id %}
 <div class="embed-youtube">
   <iframe
-    src="https://www.youtube.com/embed/{{ youtube_id }}"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    src="https://www.youtube-nocookie.com/embed/{{ youtube_id }}"
+    title="{{ include.title | default: 'Embedded YouTube video' }}"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
   </iframe>
 </div>

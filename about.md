@@ -1,10 +1,8 @@
 ---
-layout: page
+layout: about
 title: About
 permalink: /about
 ---
-
-# About
 
 Hello, I am Nikhil Raghavendra. I spend much of my time exploring intelligence in its many forms. My interests range from machine learning and autonomous agents to the ways humans reason, learn, and interpret the world around them.
 

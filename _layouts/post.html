@@ -5,10 +5,44 @@ layout: default
 {% assign minutes = words | plus: 199 | divided_by: 200 %}
 <article class="post">
   <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <p class="post-meta">{{ page.date | date: "%B %-d, %Y" }} · {{ minutes }} min read</p>
+    <div class="post-kicker" data-reveal>
+      <a href="{{ '/' | relative_url }}">Essays</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ page.category | default: "Field notes" }}</span>
+    </div>
+    <h1 class="post-title" data-reveal>{{ page.title }}</h1>
+    {% if page.dek %}
+      <p class="post-dek" data-reveal>{{ page.dek }}</p>
+    {% endif %}
+    <dl class="post-facts" data-reveal>
+      <div>
+        <dt>Published</dt>
+        <dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></dd>
+      </div>
+      <div>
+        <dt>Reading time</dt>
+        <dd>{{ minutes }} minutes</dd>
+      </div>
+    </dl>
   </header>
-  <div class="post-body">
-    {{ content }}
+
+  <div class="post-reading-layout">
+    <aside class="post-meter" aria-hidden="true">
+      <div class="post-meter-inner">
+        <span class="post-meter-value" id="reading-percent">0%</span>
+        <span class="post-meter-label">read</span>
+      </div>
+    </aside>
+
+    <div class="post-body">
+      {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
+    </div>
+
+    <aside class="post-toc" aria-label="Table of contents">
+      <div class="post-toc-inner">
+        <p>On this page</p>
+        <nav class="js-toc"></nav>
+      </div>
+    </aside>
   </div>
 </article>

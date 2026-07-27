@@ -2,15 +2,96 @@
 layout: default
 ---
 
-<section class="feed">
-  {% assign collection = paginator.posts | default: site.posts %}
-  {% for post in collection %}
-    <article class="toc-entry">
-      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-      <p class="toc-excerpt">{{ post.excerpt | strip_html | normalize_whitespace | truncate: 150 }}</p>
-      <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
-    </article>
-  {% endfor %}
+{% assign collection = paginator.posts | default: site.posts %}
+{% assign featured = collection.first %}
+{% assign featured_words = featured.content | strip_html | number_of_words %}
+{% assign featured_minutes = featured_words | plus: 199 | divided_by: 200 %}
+
+<section class="home-hero">
+  <div class="hero-kicker" data-reveal>
+    <span>Independent field notes</span>
+  </div>
+  <h1 data-reveal>Notes on minds,<br>machines, <em>and the<br>systems between.</em></h1>
+  <div class="hero-summary" data-reveal>
+    <p>Essays on machine learning, autonomous systems, security, and the older intelligence that made them possible.</p>
+    <a href="#latest">
+      Read the latest
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 4v15M6.5 13.5 12 19l5.5-5.5"></path>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<section class="latest">
+  <header class="section-heading" id="latest" data-reveal>
+    <p>Latest essay</p>
+    <span>Fresh from the notebook</span>
+  </header>
+  <a class="featured-story" href="{{ featured.url | relative_url }}" data-reveal>
+    <figure class="featured-media">
+      <span class="featured-image-frame">
+        <img
+          src="{{ featured.cover | relative_url }}"
+          srcset="{{ featured.cover_small | relative_url }} 720w, {{ featured.cover | relative_url }} 1280w"
+          sizes="(max-width: 960px) calc(100vw - 2.5rem), 58vw"
+          alt="{{ featured.cover_alt }}"
+          width="1269"
+          height="738">
+      </span>
+      <figcaption>Field note {{ site.posts.size | prepend: '0' }}</figcaption>
+    </figure>
+    <div class="featured-copy">
+      <div class="featured-meta">
+        <span>{{ featured.category }}</span>
+        <span>{{ featured.date | date: "%B %-d, %Y" }} · {{ featured_minutes }} min</span>
+      </div>
+      <h2>{{ featured.title }}</h2>
+      <p>{{ featured.dek | default: featured.excerpt | strip_html | normalize_whitespace | truncate: 190 }}</p>
+      <span class="story-link">
+        Read essay
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h13M13 6l6 6-6 6"></path>
+        </svg>
+      </span>
+    </div>
+  </a>
+</section>
+
+<section class="archive">
+  <header class="archive-heading" data-reveal>
+    <div>
+      <p>From the archive</p>
+      <span>{{ site.posts.size | minus: 1 }} more investigations</span>
+    </div>
+    <h2>Follow the<br><em>thread of curiosity.</em></h2>
+  </header>
+
+  <div class="archive-list">
+    {% for post in collection offset: 1 %}
+      {% assign post_words = post.content | strip_html | number_of_words %}
+      {% assign post_minutes = post_words | plus: 199 | divided_by: 200 %}
+      {% assign display_index = forloop.index | plus: 1 %}
+      <a class="archive-story" href="{{ post.url | relative_url }}" data-reveal>
+        <span class="archive-index">0{{ display_index }}</span>
+        <span class="archive-copy">
+          <span class="archive-meta">{{ post.category }} · {{ post.date | date: "%Y" }}</span>
+          <span class="archive-title">{{ post.title }}</span>
+          <span class="archive-dek">{{ post.dek | default: post.excerpt | strip_html | normalize_whitespace | truncate: 135 }}</span>
+        </span>
+        <span class="archive-media">
+          <img src="{{ post.cover_small | default: post.cover | relative_url }}" alt="" loading="lazy" decoding="async">
+          <span>{{ post_minutes }} min</span>
+        </span>
+        <span class="archive-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12h13M13 6l6 6-6 6"></path>
+          </svg>
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+
   {% if paginator and paginator.total_pages > 1 %}
     <nav class="pagination" aria-label="Pagination">
       {% if paginator.previous_page %}

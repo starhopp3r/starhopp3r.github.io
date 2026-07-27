@@ -1,5 +1,10 @@
 ---
 title: Hacking a Live Streaming App
+category: Security
+cover: /assets/img/covers/streaming-1280.webp
+cover_small: /assets/img/covers/streaming-720.webp
+cover_alt: A live sports broadcast playing in a browser window
+dek: How packet capture and HLS internals turned a cramped tablet stream into a living-room broadcast.
 ---
 
 > This blog post, originally written in 2019, was migrated from my old blog site.
