@@ -235,8 +235,18 @@ a {
   transition: transform 180ms ease;
 }
 
-.skip-link:focus {
+.skip-link:focus-visible {
   transform: translateY(0);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .skip-link:focus-visible {
+    transform: translateY(-160%);
+  }
+
+  .keyboard-navigation .skip-link:focus {
+    transform: translateY(0);
+  }
 }
 
 .reading-progress {
