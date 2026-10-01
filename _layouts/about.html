@@ -2,46 +2,17 @@
 layout: default
 ---
 <article class="about">
-  <header class="about-hero">
-    <div class="about-kicker" data-reveal>About this notebook</div>
-    <h1 data-reveal>Curious about how<br><em>intelligence takes shape.</em></h1>
-    <p class="about-intro" data-reveal>Across code, organisms, machines, and the systems we build around them.</p>
+  <header class="about-header">
+    <p class="eyebrow">About</p>
+    <h1>Hi, I’m Nikhil<span class="name-period">.</span></h1>
   </header>
-
-  <section class="about-story" aria-label="Biography">
-    <div class="about-story-label" data-reveal>
-      <span>01</span>
-      <p>The person<br>behind the notes</p>
+  <div class="about-prose">{{ content }}</div>
+  <section class="about-connect" aria-labelledby="connect-title">
+    <h2 id="connect-title">Find me elsewhere</h2>
+    <p>For my professional background and to get in touch, find me on LinkedIn. My code lives on GitHub.</p>
+    <div class="profile-links">
+      <a href="https://www.linkedin.com/in/nikrag/">LinkedIn {% include icons/arrow-up-right.svg %}</a>
+      <a href="https://github.com/starhopp3r">GitHub {% include icons/arrow-up-right.svg %}</a>
     </div>
-    <div class="about-prose" data-reveal>
-      {{ content }}
-    </div>
-  </section>
-
-  <section class="about-interests">
-    <header data-reveal>
-      <div>
-        <span>02</span>
-        <p>Lines of inquiry</p>
-      </div>
-      <h2>The recurring questions.</h2>
-    </header>
-    <ol>
-      <li data-reveal>
-        <span>01</span>
-        <h3>Machine intelligence</h3>
-        <p>How small and large models learn, reason, and become useful in the physical world.</p>
-      </li>
-      <li data-reveal>
-        <span>02</span>
-        <h3>Autonomous systems</h3>
-        <p>How agents sense, decide, coordinate, and fail when software meets an uncertain environment.</p>
-      </li>
-      <li data-reveal>
-        <span>03</span>
-        <h3>Human cognition</h3>
-        <p>How evolution shaped the way we perceive minds, make meaning, and respond to new machines.</p>
-      </li>
-    </ol>
   </section>
 </article>

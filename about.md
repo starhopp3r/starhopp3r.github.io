@@ -4,8 +4,8 @@ title: About
 permalink: /about
 ---
 
-Hello, I am Nikhil Raghavendra. I spend much of my time exploring intelligence in its many forms. My interests range from machine learning and autonomous agents to the ways humans reason, learn, and interpret the world around them.
+<p>I spend much of my time thinking about intelligence in all its forms, from machine-learning models and autonomous agents to the quieter, older machinery of how humans reason, learn, and make sense of the world around them. Alongside that runs a lifelong love of hardware and security: understanding how systems are built from the ground up and what happens when you push them past the limits their designers imagined.</p>
 
-I have long been fascinated by how intelligence emerges, whether it comes from code, biological systems, or the structures we design. This blog is where I examine those questions. I break down technical ideas, document the tools and systems I build, and reflect on what these developments may mean for the future.
+<p>What fascinates me most is how intelligence emerges. Somewhere between a pile of numbers and a coherent sentence, between a nervous system and a thought, between a set of rules and a system that surprises its own designers, something remarkable happens, and I can't stop wanting to understand it. Hardware keeps me honest about the physical constraints that intelligence has to live within, and security reminds me that every system, however clever, has edges worth exploring. This blog is where I chase all of it. I take technical ideas apart until they make sense, document the tools and systems I build along the way, and reflect on what these developments might mean for the future we're walking into.</p>
 
-My aim is to offer clear, grounded, and practical perspectives. If you are interested in the mechanics of intelligence and the engineering behind it, I hope these notes serve as a useful guide.
+<p>My hope is to offer perspectives that are clear, grounded, and genuinely useful. If you're curious about the mechanics of intelligence, the hardware it runs on, or the hidden vulnerabilities in the systems around us, I'm glad you're here, and I hope these notes help you see a little further.</p>
