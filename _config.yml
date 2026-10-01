@@ -6,11 +6,9 @@ timezone: Asia/Singapore
 permalink: /posts/:title/
 markdown: kramdown
 highlighter: rouge
-paginate: 5
-paginate_path: "/page:num/"
 
 navigation:
-  - name: Home
+  - name: Writing
     url: /
   - name: About
     url: /about
@@ -18,7 +16,6 @@ navigation:
 author: Nikhil Raghavendra
 
 plugins:
-  - jekyll-paginate
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
