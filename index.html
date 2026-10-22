@@ -23,7 +23,7 @@ layout: default
   {% if site.data.books.size > 0 %}
     <div class="folder" id="books" role="tabpanel" aria-labelledby="books-tab" hidden>
       <h2 class="visually-hidden">Books</h2>
-      <p class="shelf-note">Books I've read over the past year.</p>
+      <p class="shelf-note">Books that have stayed with me.</p>
       <ul class="bookshelf">
         {% for book in site.data.books %}
           {% assign base = book.cover | split: "." | first %}
