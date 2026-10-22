@@ -106,7 +106,7 @@ h1, h2, h3, h4 { font-weight: 400; }
 /* A narrow centred page under a breadcrumb trail. */
 .site-shell { width: min(100% - 48px, 736px); margin-inline: auto; padding: 80px 0 96px; }
 .site-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
-.breadcrumb { display: flex; flex-wrap: wrap; gap: 0 6px; min-width: 0; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.breadcrumb { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 6px; min-width: 0; font-size: 13px; line-height: 1.5; color: var(--muted); }
 .breadcrumb [aria-current] { overflow-wrap: anywhere; }
 
 /* Home: a wordmark, then the essays and books filed in a tabbed folder. */
