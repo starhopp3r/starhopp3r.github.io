@@ -2,17 +2,10 @@
 layout: default
 ---
 <article class="about">
-  <header class="about-header">
-    <p class="eyebrow">About</p>
-    <h1>Hi, I’m Nikhil<span class="name-period">.</span></h1>
-  </header>
+  <h1 class="visually-hidden">About</h1>
   <div class="about-prose">{{ content }}</div>
-  <section class="about-connect" aria-labelledby="connect-title">
-    <h2 id="connect-title">Find me elsewhere</h2>
-    <p>For my professional background and to get in touch, find me on LinkedIn. My code lives on GitHub.</p>
-    <div class="profile-links">
-      <a href="https://www.linkedin.com/in/nikrag/">LinkedIn {% include icons/arrow-up-right.svg %}</a>
-      <a href="https://github.com/starhopp3r">GitHub {% include icons/arrow-up-right.svg %}</a>
-    </div>
-  </section>
+  <div class="bracket-links">
+    <a href="https://www.linkedin.com/in/nikrag/">[linkedin]</a>
+    <a href="https://github.com/starhopp3r">[github]</a>
+  </div>
 </article>

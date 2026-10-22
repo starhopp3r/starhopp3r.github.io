@@ -1,9 +1,6 @@
 ---
 title: "A Proof of Concept for Setting Up a Networkless Shell"
 category: Hardware & Security
-cover: /assets/img/covers/aircmd-1440.webp
-cover_small: /assets/img/covers/aircmd-720.webp
-cover_alt: The AirCmd radio and USB hardware prototypes
 dek: Building a LoRa command shell for air-gapped systems.
 ---
 

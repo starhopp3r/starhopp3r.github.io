@@ -1,9 +1,6 @@
 ---
 title: "Sniffing My Neighbour's Phone Number"
 category: Privacy & Security
-cover: /assets/img/covers/airdrop-1440.webp
-cover_small: /assets/img/covers/airdrop-720.webp
-cover_alt: Apple's AirDrop interface on an iPhone
 dek: How AirDrop broadcasts can expose nearby users' phone numbers.
 ---
 

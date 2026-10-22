@@ -1,9 +1,6 @@
 ---
 title: Hacking a Live Streaming App
 category: Security
-cover: /assets/img/covers/streaming-1280.webp
-cover_small: /assets/img/covers/streaming-720.webp
-cover_alt: A live sports broadcast playing in a browser window
 dek: Using packet capture to watch a tablet's live stream on TV.
 ---
 

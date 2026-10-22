@@ -1,11 +1,7 @@
 ---
 title: "The Evolutionary Foundations of Mind Perception"
 category: Cognition & AI
-cover: /assets/img/covers/mind-perception-1280.webp
-cover_small: /assets/img/covers/mind-perception-720.webp
-cover_alt: An illustrated Cambrian seascape filled with early animal life
 dek: How evolution shapes the minds we see in people and machines.
-mathjax: true
 ---
 
 Whenever I scroll through social media, read the news, or watch YouTube, I find discussions of Artificial Intelligence (AI), AI agents, and Artificial General Intelligence (AGI). They often describe technologies that could reshape society or threaten it if their goals conflict with ours or people misuse them. These warnings made me ask a simpler question: why are we so afraid of a computer program we built, especially when it still cannot match the full range of human intelligence and intellectual agency?
@@ -91,9 +87,9 @@ Although HADD has long been central to the Cognitive Science of Religion, empiri
 
 As a result, the scientific consensus is moving toward treating HADD as a predictive processing bias, or a Bayesian prior, rather than a fixed reflex. Bayes' theorem describes how we update beliefs with new evidence:
 
-$$P(\text{Agency} \mid \text{Sensory Input}) = \frac{P(\text{Sensory Input} \mid \text{Agency}) \cdot P(\text{Agency})}{P(\text{Sensory Input})}$$
+<div class="math-block"><math display="block"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mtext>Agency</mtext><mo>∣</mo><mtext>Sensory Input</mtext><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>P</mi><mo stretchy="false">(</mo><mtext>Sensory Input</mtext><mo>∣</mo><mtext>Agency</mtext><mo stretchy="false">)</mo><mo>⋅</mo><mi>P</mi><mo stretchy="false">(</mo><mtext>Agency</mtext><mo stretchy="false">)</mo></mrow><mrow><mi>P</mi><mo stretchy="false">(</mo><mtext>Sensory Input</mtext><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">P(\text{Agency} \mid \text{Sensory Input}) = \frac{P(\text{Sensory Input} \mid \text{Agency}) \cdot P(\text{Agency})}{P(\text{Sensory Input})}</annotation></semantics></math></div>
 
-In this equation, $P(\text{Agency})$ is the prior probability: the expectation that an agent is present before we process any sensory data. Evolution has effectively "weighted" this value to be very high. A high prior means that even weak or ambiguous evidence, represented by the likelihood $P(\text{Sensory Input} \mid \text{Agency})$, produces a high posterior probability, $P(\text{Agency} \mid \text{Sensory Input})$. Because our brains are chemically primed to expect agents, little evidence is needed to convince us that one is present.
+In this equation, <math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mtext>Agency</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(\text{Agency})</annotation></semantics></math> is the prior probability: the expectation that an agent is present before we process any sensory data. Evolution has effectively "weighted" this value to be very high. A high prior means that even weak or ambiguous evidence, represented by the likelihood <math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mtext>Sensory Input</mtext><mo>∣</mo><mtext>Agency</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(\text{Sensory Input} \mid \text{Agency})</annotation></semantics></math>, produces a high posterior probability, <math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mtext>Agency</mtext><mo>∣</mo><mtext>Sensory Input</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(\text{Agency} \mid \text{Sensory Input})</annotation></semantics></math>. Because our brains are chemically primed to expect agents, little evidence is needed to convince us that one is present.
 
 In this account, the brain quickly predicts the presence of an agent and then tests that prediction against its surroundings. Learned cultural knowledge shapes how we interpret the first biological response. A sudden rustle in the woods may trigger the arousal associated with HADD, but whether someone identifies a bear, a spirit, or a sensory error depends entirely on their cultural understanding of what exists. Biology drives the search for an agent, while culture supplies its identity.
 

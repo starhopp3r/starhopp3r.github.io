@@ -1,0 +1,20 @@
+# The books tab on the home page shows these covers in this order. The tab stays hidden while the list is empty.
+# Put each cover image in assets/img/books/. `url` is optional; with it, the cover links there.
+# Then run `python3 _tools/images.py`, which makes the sharp, shelf-sized copies the page serves.
+#
+# - title: Gödel, Escher, Bach
+#   author: Douglas Hofstadter
+#   cover: /assets/img/books/geb.jpg
+#   url: https://example.com
+- title: Being You
+  author: Anil Seth
+  cover: /assets/img/books/being-you.jpg
+- title: The Tale of the Dueling Neurosurgeons
+  author: Sam Kean
+  cover: /assets/img/books/duel-neuro.jpg
+- title: The Improbability Principle
+  author: David J. Hand
+  cover: /assets/img/books/improb-principle.jpg
+- title: The Language Instinct
+  author: Steven Pinker
+  cover: /assets/img/books/lang-instinct.jpg
