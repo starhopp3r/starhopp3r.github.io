@@ -1,26 +1,9 @@
 # Made by _tools/images.py, which lists every post image's size and the widths of its WebP copies.
-"/assets/img/aircmd-arch.png": {"width": 4740, "height": 1577, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/aircmd-hardware.png": {"width": 4032, "height": 2268, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/aircmd-shell.png": {"width": 2880, "height": 1800, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/airdropofficial.png": {"width": 1905, "height": 965, "copies": [480, 736, 1104, 1472, 1905]}
-"/assets/img/ble_sniffer.png": {"width": 4032, "height": 2268, "copies": [480, 736, 1104, 1472, 2208]}
 "/assets/img/cambrian.png": {"width": 1269, "height": 738, "copies": [480, 736, 1104, 1269]}
 "/assets/img/conservation.png": {"width": 1488, "height": 582, "copies": [480, 736, 1104, 1488]}
-"/assets/img/dropsniffer.png": {"width": 1920, "height": 1080, "copies": [480, 736, 1104, 1472, 1920]}
 "/assets/img/eliza.png": {"width": 751, "height": 487, "copies": [480, 751]}
-"/assets/img/hack1.png": {"width": 666, "height": 325, "copies": [480, 666]}
-"/assets/img/hack2.png": {"width": 2880, "height": 1800, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/hack3.png": {"width": 2880, "height": 1800, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/hack4.png": {"width": 2880, "height": 1800, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/hack5.png": {"width": 1440, "height": 900, "copies": [480, 736, 1104, 1440]}
-"/assets/img/hack6.png": {"width": 2880, "height": 1800, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/hexway.png": {"width": 1871, "height": 804, "copies": [480, 736, 1104, 1472, 1871]}
 "/assets/img/lrvnano.jpg": {"width": 3035, "height": 1707, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/lw_xtweet.png": {"width": 1024, "height": 512, "copies": [480, 736, 1024]}
 "/assets/img/metadatacen.jpeg": {"width": 1280, "height": 540, "copies": [480, 736, 1104, 1280]}
-"/assets/img/redisdb.png": {"width": 1920, "height": 1080, "copies": [480, 736, 1104, 1472, 1920]}
-"/assets/img/tefomp.png": {"width": 2752, "height": 1536, "copies": [480, 736, 1104, 1472, 2208]}
 "/assets/img/therianthrope.png": {"width": 1200, "height": 675, "copies": [480, 736, 1200]}
 "/assets/img/tol.png": {"width": 2000, "height": 944, "copies": [480, 736, 1104, 1472, 2000]}
 "/assets/img/uncanny.png": {"width": 2590, "height": 1568, "copies": [480, 736, 1104, 1472, 2208]}
-"/assets/img/wireshark_airdrop.png": {"width": 1919, "height": 1041, "copies": [480, 736, 1104, 1472, 1919]}
