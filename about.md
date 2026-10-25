@@ -4,8 +4,10 @@ title: About
 permalink: /about
 ---
 
-<p>I spend much of my time thinking about intelligence, from machine-learning models and autonomous agents to how humans reason, learn, and understand the world. I've also had a lifelong interest in hardware and security. I want to understand how people build systems and what happens when we push those systems beyond the limits their designers expected.</p>
+<p>I spend much of my time thinking about intelligence, from machine-learning models and autonomous agents to the ways humans reason, learn, and make sense of the world. Alongside that runs a lifelong interest in hardware and security: how systems are built, and what happens when they are pushed past the limits their designers expected.</p>
 
-<p>What interests me most is how intelligence emerges. How do numbers produce a coherent sentence, a nervous system produce a thought, or a set of rules produce behavior that surprises its designers? I keep returning to these questions. Hardware helps me understand the physical limits of intelligence, while security shows me where even clever systems can fail. On this blog, I explain technical ideas as I come to understand them, document the tools and systems I build, and consider what these developments might mean for the future.</p>
+<p>What fascinates me most is how intelligence emerges. How does a pile of numbers produce a coherent sentence, a nervous system produce a thought, or a simple set of rules produce behavior that surprises the people who wrote them? I keep coming back to these questions. Hardware shows me the physical limits that intelligence must work within, and security reveals where even the cleverest systems break.</p>
 
-<p>I hope these notes offer clear, well-supported, useful views. If you're curious about how intelligence works, the hardware it runs on, or the hidden weaknesses in the systems around us, I'm glad you're here. I hope you find something that helps you understand them better.</p>
+<p>This blog is where I work through those ideas. I explain technical concepts as I come to understand them, document the tools and systems I build, and consider what these developments might mean for the future. I aim for writing that is clear, well-supported, and useful.</p>
+
+<p>If you're curious about how intelligence works, the machines it runs on, or the hidden weaknesses in the systems around us, you're in the right place. I hope you leave with a little more understanding than you arrived with.</p>
