@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#ffffff">
-  {% seo %}
+  {% comment %} The home page's tab shows just the name; the SEO tag would add the description after it. {% endcomment %}
+  {% if page.url == '/' %}<title>{{ site.title | escape }}</title>{% seo title=false %}{% else %}{% seo %}{% endif %}
   {% feed_meta %}
   <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/favicons/apple-touch-icon.png?v=4' | relative_url }}">
   <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="{{ '/assets/img/favicons/favicon.ico?v=4' | relative_url }}">
