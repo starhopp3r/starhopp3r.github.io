@@ -41,12 +41,7 @@
 </head>
 <body id="top" class="page page-{{ page.layout | default: 'default' }}{% if page.url == '/' %} page-home{% endif %}">
   <div class="site-shell">
-    {% if page.url == '/' %}
-      <header class="masthead">
-        <h1 class="wordmark">Nikhil Raghavendra</h1>
-        <p class="tagline">Studying intelligence, artificial and otherwise</p>
-      </header>
-    {% else %}
+    {% unless page.url == '/' %}
       <header class="site-top">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="{{ '/' | relative_url }}">Home</a><span aria-hidden="true">/</span>
@@ -57,7 +52,7 @@
           {% endif %}
         </nav>
       </header>
-    {% endif %}
+    {% endunless %}
     <main id="main" class="page-content">{{ content }}</main>
   </div>
   {% if page.layout == 'post' and content contains '<table' %}<script src="{{ '/assets/js/table-merge.js' | relative_url }}" defer></script>{% endif %}

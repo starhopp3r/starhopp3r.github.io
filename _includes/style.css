@@ -237,10 +237,14 @@ math { font-family: "STIX Two Math", "Cambria Math", math; font-size: .95em; }
   :root { scroll-padding-top: 1.4rem; }
   .site-shell { width: calc(100% - 40px); padding: 32px 0 64px; }
   .site-top { margin-bottom: 20px; }
-  .masthead { margin-bottom: 32px; }
-  .intro { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 32px; }
-  .intro picture, .intro img { width: 100%; }
-  .intro img { height: auto; }
+  /* The name, room and intro fill the first screen, the room taking whatever height the words leave. */
+  .page-home .site-shell { padding-top: 0; }
+  .hero { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; padding-block: 20px 16px; }
+  .masthead { margin-bottom: 14px; }
+  .intro { flex: 1; flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 0; font-size: 17px; line-height: 1.45; }
+  .intro p + p, .bracket-links { margin-top: 8px; }
+  .intro picture { position: relative; flex: 1 1 0; min-height: 108px; }
+  .intro img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
   .wordmark { font-size: clamp(36px, 12vw, 52px); }
   .folder { padding: 20px 16px; }
   .bookshelf { gap: 28px 20px; }
