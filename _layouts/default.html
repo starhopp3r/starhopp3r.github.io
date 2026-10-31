@@ -7,7 +7,6 @@
   <meta name="theme-color" content="#ffffff">
   {% comment %} The home page's tab shows just the name; the SEO tag would add the description after it. {% endcomment %}
   {% if page.url == '/' %}<title>{{ site.title | escape }}</title>{% seo title=false %}{% else %}{% seo %}{% endif %}
-  {% feed_meta %}
   <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/favicons/apple-touch-icon.png?v=4' | relative_url }}">
   <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="{{ '/assets/img/favicons/favicon.ico?v=4' | relative_url }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicons/favicon-32x32.png?v=4' | relative_url }}">
@@ -37,29 +36,24 @@
   <script defer src="{{ '/assets/js/site.js' | relative_url }}"></script>
   {% comment %} Browsers that can start loading a page while the pointer rests on its link, so it opens at once. {% endcomment %}
   <script type="speculationrules">
-    {"prerender": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"href_matches": "/feed.xml"}}]}, "eagerness": "moderate"}]}
+    {"prerender": [{"where": {"href_matches": "/*"}, "eagerness": "moderate"}]}
   </script>
 </head>
 <body id="top" class="page page-{{ page.layout | default: 'default' }}{% if page.url == '/' %} page-home{% endif %}">
   <div class="site-shell">
     {% if page.url == '/' %}
       <header class="masthead">
-        <div>
-          <h1 class="wordmark">Nikhil Raghavendra</h1>
-          <p class="tagline">Studying intelligence, artificial and otherwise</p>
-        </div>
-        <nav class="masthead-nav" aria-label="Main navigation">
-          <a href="{{ '/about' | relative_url }}">about</a>
-        </nav>
+        <h1 class="wordmark">Nikhil Raghavendra</h1>
+        <p class="tagline">Studying intelligence, artificial and otherwise</p>
       </header>
     {% else %}
       <header class="site-top">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="{{ '/' | relative_url }}">home</a><span aria-hidden="true">/</span>
+          <a href="{{ '/' | relative_url }}">Home</a><span aria-hidden="true">/</span>
           {% if page.layout == 'post' %}
-            <a href="{{ '/#writing' | relative_url }}">essays</a><span aria-hidden="true">/</span><span aria-current="page">{{ page.slug | downcase }}</span>
+            <a href="{{ '/#writing' | relative_url }}">Essays</a><span aria-hidden="true">/</span><span aria-current="page">{{ page.slug | replace: '-', ' ' }}</span>
           {% else %}
-            <span aria-current="page">{{ page.title | default: page.slug | downcase }}</span>
+            <span aria-current="page">{{ page.title | default: page.slug }}</span>
           {% endif %}
         </nav>
       </header>

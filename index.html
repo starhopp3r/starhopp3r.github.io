@@ -2,10 +2,27 @@
 layout: default
 ---
 
+<div class="intro">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="{{ '/assets/img/cover/lofi-bedroom-still.webp' | relative_url }}">
+    <img src="{{ '/assets/img/cover/lofi-bedroom.webp' | relative_url }}" width="248" height="216" alt="Pixel-art bedroom: someone in red headphones types at a desk with code on the monitor, while an orange cat sleeps on the bed." decoding="async" fetchpriority="high">
+  </picture>
+  <div>
+    <p>Hello! I’m an AI engineer working on agents, agentic tools, small language models, and data analysis.</p>
+    <p>I graduated from Nanyang Technological University with a Bachelor’s degree in Electrical and Electronic Engineering. I’m also a Google Cloud Certified Professional Cloud Architect and Machine Learning Engineer, as well as a Blue Team Level 1 and Certified SCADA Security Engineer.</p>
+    <p>My research interests also include healthcare and archaeology (papers coming soon). In my free time, I enjoy reading, photography, and Silambam. Feel free to reach out!</p>
+    <div class="bracket-links">
+      <a href="https://www.linkedin.com/in/nikrag/">[LinkedIn]</a>
+      <a href="https://github.com/starhopp3r">[GitHub]</a>
+      <a href="mailto:me@nikhilr.io">[Email]</a>
+    </div>
+  </div>
+</div>
+
 <section class="writing" id="writing">
   <div class="folder-tabs" role="tablist" aria-label="Essays and books">
-    <button class="folder-tab" type="button" role="tab" id="essays-tab" aria-controls="essays" aria-selected="true">essays</button>
-    {% if site.data.books.size > 0 %}<button class="folder-tab" type="button" role="tab" id="books-tab" aria-controls="books" aria-selected="false" tabindex="-1">books</button>{% endif %}
+    <button class="folder-tab" type="button" role="tab" id="essays-tab" aria-controls="essays" aria-selected="true">Essays</button>
+    {% if site.data.books.size > 0 %}<button class="folder-tab" type="button" role="tab" id="books-tab" aria-controls="books" aria-selected="false" tabindex="-1">Books</button>{% endif %}
   </div>
   <div class="folder" id="essays" role="tabpanel" aria-labelledby="essays-tab">
     <h2 class="visually-hidden">Essays</h2>
@@ -13,7 +30,7 @@ layout: default
       {% for post in site.posts %}
         <li class="essay-row">
           <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          {% if post.category %}<span class="tag">{{ post.category | downcase }}</span>{% endif %}
+          {% if post.category %}<span class="tag">{{ post.category }}</span>{% endif %}
           <span class="leader" aria-hidden="true"></span>
           <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d/%-m/%Y" }}</time>
         </li>
@@ -36,5 +53,4 @@ layout: default
       </ul>
     </div>
   {% endif %}
-  <a class="rss-link" href="{{ '/feed.xml' | relative_url }}">[rss]</a>
 </section>

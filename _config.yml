@@ -10,13 +10,10 @@ highlighter: rouge
 navigation:
   - name: Writing
     url: /
-  - name: About
-    url: /about
 
 author: Nikhil Raghavendra
 
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
 
