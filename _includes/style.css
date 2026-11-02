@@ -229,9 +229,9 @@ math { font-family: "STIX Two Math", "Cambria Math", math; font-size: .95em; }
 .bracket-links a { color: var(--accent); text-decoration-style: dotted; }
 .bracket-links a:hover { color: var(--accent-hover); }
 
-/* The home page gives up its top margin as the window gets shorter, so the essays fit without a scrollbar. */
+/* The home page gives up its top margin as the window gets shorter, so the essays fit without a scrollbar. Each essay takes 31px. */
 @media (min-width: 641px) {
-  .page-home .site-shell { padding-block: clamp(24px, calc(100vh - 640px), 80px) 24px; }
+  .page-home .site-shell { padding-block: clamp(24px, calc(100vh - {{ site.posts.size | times: 31 | plus: 578 }}px), 80px) 24px; }
 }
 @media (max-width: 640px) {
   :root { scroll-padding-top: 1.4rem; }
