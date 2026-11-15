@@ -1,60 +1,100 @@
+{%- comment %}
+  The fonts a page's first screen needs ride inside the page as data, so its first paint already has them and no
+  text flashes in a system font. _tools/fonts.py makes those small copies; _plugins/inline_fonts.rb puts them in.
+  The layout says which ones this page carries (home, post, italics). Text waits for any other font
+  (font-display: block) and never shows in a fallback first.
+{% endcomment -%}
+/* The whole fonts. Browsers fetch one only for what the small copies below leave out: accented letters, rarer signs, and code. */
 @font-face {
   font-family: "Crimson Text";
   src: url("/assets/fonts/crimson-text/normal-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "Crimson Text";
   src: url("/assets/fonts/crimson-text/italic-latin.woff2") format("woff2");
   font-style: italic;
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "Crimson Text";
   src: url("/assets/fonts/crimson-text/semibold-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "Crimson Text";
   src: url("/assets/fonts/crimson-text/semibold-italic-latin.woff2") format("woff2");
   font-style: italic;
   font-weight: 600;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "Caveat";
   src: url("/assets/fonts/caveat/normal-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
-}
-/* Just the letters of the wordmark, a fifth of the full font. Browsers fall back to the full font above only for other letters. */
-@font-face {
-  font-family: "Caveat";
-  src: url("/assets/fonts/caveat/wordmark.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  unicode-range: U+0020, U+004E, U+0052, U+0061, U+0064, U+0065, U+0067, U+0068, U+0069, U+006B, U+006C, U+006E, U+0072, U+0076;
+  font-display: block;
 }
 @font-face {
   font-family: "JetBrains Mono";
   src: url("/assets/fonts/jetbrains-mono/normal-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 800;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "JetBrains Mono";
   src: url("/assets/fonts/jetbrains-mono/italic-latin.woff2") format("woff2");
   font-style: italic;
   font-weight: 400 800;
-  font-display: swap;
+  font-display: block;
+}
+/* The letters, digits and punctuation of English prose, about two thirds the size of the whole font. Every page carries the normal one; essays carry the others. */
+@font-face {
+  font-family: "Crimson Text";
+  src: url("{{ '/assets/fonts/crimson-text/normal-basic.woff2' | font_src: true }}") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+00B0, U+00B7, U+00D7, U+00E0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2026;
+}
+@font-face {
+  font-family: "Crimson Text";
+  src: url("{{ '/assets/fonts/crimson-text/italic-basic.woff2' | font_src: italics }}") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: block;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+00B0, U+00B7, U+00D7, U+00E0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2026;
+}
+@font-face {
+  font-family: "Crimson Text";
+  src: url("{{ '/assets/fonts/crimson-text/semibold-basic.woff2' | font_src: post }}") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+00B0, U+00B7, U+00D7, U+00E0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2026;
+}
+/* Just the letters of the wordmark, a fifth of the full font. The home page carries it. */
+@font-face {
+  font-family: "Caveat";
+  src: url("{{ '/assets/fonts/caveat/wordmark.woff2' | font_src: home }}") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  unicode-range: U+0020, U+004E, U+0052, U+0061, U+0064, U+0065, U+0067, U+0068, U+0069, U+006B, U+006C, U+006E, U+0072, U+0076;
+}
+/* Tags, links and other labels: plain ASCII without the code ligatures, a quarter of the whole font. Every page carries it. */
+@font-face {
+  font-family: "JetBrains Mono Label";
+  src: url("{{ '/assets/fonts/jetbrains-mono/labels.woff2' | font_src: true }}") format("woff2");
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: block;
 }
 
 /* White paper, black ink, red ornaments: serif for reading, monospace for tags and code, a hand for the name. */
@@ -83,6 +123,7 @@
   --divider-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5C12.7 8.6 15.4 11.3 21.5 12 15.4 12.7 12.7 15.4 12 21.5 11.3 15.4 8.6 12.7 2.5 12 8.6 11.3 11.3 8.6 12 2.5Z' fill='none' stroke='%23f28b82' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E");
   --serif: "Crimson Text", Georgia, "Times New Roman", serif;
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --label: "JetBrains Mono Label", var(--mono);
   --script: "Caveat", "Bradley Hand", "Segoe Print", cursive;
   scroll-padding-top: 2rem;
   -webkit-text-size-adjust: 100%;
@@ -101,7 +142,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 h1, h2, h3, h4, p, figure { margin: 0; }
 h1, h2, h3, h4 { font-weight: 400; }
 .fact-sep { color: var(--muted); }
-.tag { font: 11px/1.5 var(--mono); color: var(--tag); white-space: nowrap; }
+.tag { font: 11px/1.5 var(--label); color: var(--tag); white-space: nowrap; }
 
 /* A narrow centred page under a breadcrumb trail. */
 .site-shell { width: min(100% - 48px, 736px); margin-inline: auto; padding: 80px 0 96px; }
@@ -148,7 +189,9 @@ a.book-cover:hover { transform: translateY(-4px); box-shadow: 0 1px 1px rgb(0 0 
 .post-body h2 { margin: 44px 0 14px; font-size: 30px; font-weight: 600; line-height: 1.25; }
 .post-body h3 { margin: 34px 0 12px; font-size: 24px; line-height: 1.375; }
 .post-body h4 { margin: 26px 0 8px; font-size: 21px; line-height: 1.4; }
-.post-body .heading-anchor { margin-right: 8px; font: 400 .85em var(--mono); color: var(--mark); text-decoration: none; }
+.post-body .heading-anchor { margin-right: 8px; font: 400 .85em var(--label); color: var(--mark); text-decoration: none; }
+/* Deeper headings join their hashes with a code ligature, which only the whole font has. */
+.post-body :is(h3, h4) .heading-anchor { font-family: var(--mono); }
 .heading-anchor:hover { color: var(--accent-hover); }
 .post-body a:not(.heading-anchor) { color: var(--accent); }
 .post-body a:not(.heading-anchor):hover { color: var(--accent-hover); }
@@ -162,7 +205,7 @@ a.book-cover:hover { transform: translateY(-4px); box-shadow: 0 1px 1px rgb(0 0 
 .post-body strong { font-weight: 600; }
 .post-body img { display: block; max-width: 100%; height: auto; margin: 24px auto 0; }
 .post-body img + em { display: block; max-width: 46rem; margin: 8px auto 0; font-size: 14px; font-style: normal; line-height: 1.6; text-align: center; color: var(--muted); }
-.post-body img + em::before { counter-increment: figure; content: "Figure " counter(figure) "."; margin-right: 8px; font: 700 11px var(--mono); color: var(--ink); }
+.post-body img + em::before { counter-increment: figure; content: "Figure " counter(figure) "."; margin-right: 8px; font: 700 11px var(--label); color: var(--ink); }
 .post-body iframe { display: block; max-width: 100%; border: 0; }
 .embed-youtube { margin: 24px 0; }
 .embed-youtube iframe { width: 100%; height: auto; min-height: 200px; aspect-ratio: 16 / 9; }
@@ -191,7 +234,7 @@ pre code { font-size: 1em; background: none; }
 .highlighter-rouge, .post-body > pre { margin: 24px 0; }
 .code-container { position: relative; min-width: 0; }
 .code-container pre { padding-top: 42px; }
-.copy-code { position: absolute; top: 8px; right: 8px; z-index: 1; padding: 1px 8px; border: 1px solid var(--line); background: var(--bg); color: var(--muted); font: 11px/1.6 var(--mono); }
+.copy-code { position: absolute; top: 8px; right: 8px; z-index: 1; padding: 1px 8px; border: 1px solid var(--line); background: var(--bg); color: var(--muted); font: 11px/1.6 var(--label); }
 .copy-code:hover { border-color: var(--ornament); color: var(--ink); }
 .highlight .c, .highlight .c1, .highlight .cm, .highlight .cp, .highlight .cs { color: var(--sy-comment); font-style: italic; }
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .o, .highlight .ow { color: var(--sy-keyword); }
@@ -225,7 +268,7 @@ math { font-family: "STIX Two Math", "Cambria Math", math; font-size: .95em; }
 .image-lightbox-caption { max-width: 52rem; margin: 20px auto 0; color: var(--muted); font-size: 16px; line-height: 1.6; text-align: center; }
 
 /* Biography shares the essay type. */
-.bracket-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; font: 600 13px/1.5 var(--mono); }
+.bracket-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; font: 600 13px/1.5 var(--label); }
 .bracket-links a { color: var(--accent); text-decoration-style: dotted; }
 .bracket-links a:hover { color: var(--accent-hover); }
 

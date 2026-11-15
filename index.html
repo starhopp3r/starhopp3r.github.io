@@ -53,7 +53,7 @@ layout: default
           {% assign sized = base | append: "-296.webp" %}
           {% assign sized_file = site.static_files | where: "path", sized | first %}
           <li>
-            {% if book.url %}<a class="book-cover" href="{{ book.url }}">{% else %}<span class="book-cover">{% endif %}<img {% if sized_file %}src="{{ sized | relative_url }}" srcset="{{ base | append: '-148.webp' | relative_url }} 148w, {{ sized | relative_url }} 296w, {{ base | append: '-444.webp' | relative_url }} 444w, {{ base | append: '-592.webp' | relative_url }} 592w" sizes="(max-width: 640px) calc(50vw - 47px), 148px"{% else %}src="{{ book.cover | relative_url }}"{% endif %} width="148" height="222" alt="{{ book.title }} by {{ book.author }}" decoding="async">{% if book.url %}</a>{% else %}</span>{% endif %}
+            {% if book.url %}<a class="book-cover" href="{{ book.url }}">{% else %}<span class="book-cover">{% endif %}<img {% if sized_file %}src="{{ sized | relative_url }}" srcset="{{ base | append: '-148.webp' | relative_url }} 148w, {{ sized | relative_url }} 296w, {{ base | append: '-444.webp' | relative_url }} 444w, {{ base | append: '-592.webp' | relative_url }} 592w" sizes="(max-width: 640px) calc(50vw - 47px), 148px"{% else %}src="{{ book.cover | relative_url }}"{% endif %} width="148" height="222" alt="{{ book.title }} by {{ book.author }}" loading="lazy" decoding="async">{% if book.url %}</a>{% else %}</span>{% endif %}
           </li>
         {% endfor %}
       </ul>

@@ -12,13 +12,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicons/favicon-32x32.png?v=4' | relative_url }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicons/favicon-16x16.png?v=4' | relative_url }}">
   <link rel="manifest" href="{{ '/assets/img/favicons/site.webmanifest?v=4' | relative_url }}">
-  <link rel="preload" href="{{ '/assets/fonts/crimson-text/normal-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ '/assets/fonts/jetbrains-mono/normal-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  {% if page.layout == 'post' %}<link rel="preload" href="{{ '/assets/fonts/crimson-text/semibold-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>{% endif %}
-  {% if page.dek %}<link rel="preload" href="{{ '/assets/fonts/crimson-text/italic-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>{% endif %}
-  {% if page.url == '/' %}<link rel="preload" href="{{ '/assets/fonts/caveat/wordmark.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>{% endif %}
-  {% comment %} The stylesheet is small, so it rides in the page itself and nothing waits on a second request. {% endcomment %}
+  {% comment %} The stylesheet rides in the page itself, with the fonts the first screen needs, so nothing waits on a second request. {% endcomment %}
+  {% assign home = false %}{% if page.url == '/' %}{% assign home = true %}{% endif %}
+  {% assign post = false %}{% if page.layout == 'post' %}{% assign post = true %}{% endif %}
+  {% assign italics = false %}{% if post %}{% if page.dek or content contains '<em>' or content contains '<blockquote>' %}{% assign italics = true %}{% endif %}{% endif %}
   <style>{% include style.css %}</style>
+  {% comment %} A browser reads a font carried in the page only when text first asks for it, a frame after the first paint. Asking here puts the fonts in that paint. {% endcomment %}
+  <script>
+    (() => {
+      const carried = ["Crimson Text 400 normal", "JetBrains Mono Label 400 800 normal"{% if home %}, "Caveat 400 normal"{% endif %}{% if post %}, "Crimson Text 600 normal"{% endif %}{% if italics %}, "Crimson Text 400 italic"{% endif %}];
+      for (const font of document.fonts) {
+        const small = !/^U\+0+-10FFFF$/i.test(font.unicodeRange) || font.family.includes("Label");
+        if (small && carried.includes(`${font.family.replace(/"/g, "")} ${font.weight} ${font.style}`)) font.load();
+      }
+    })();
+  </script>
   {% if page.mathjax %}
     <script>
       window.MathJax = {

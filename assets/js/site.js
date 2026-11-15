@@ -36,6 +36,13 @@
   const linkedTab = tabs.find((tab) => location.hash === `#${tab.getAttribute("aria-controls")}`);
   if (linkedTab) selectTab(linkedTab);
 
+  // The covers wait while the books tab is closed. Reaching for the tab fetches them, so they are there when it opens.
+  const booksTab = document.getElementById("books-tab");
+  if (booksTab) {
+    const fetchCovers = () => document.querySelectorAll("#books img").forEach((cover) => { cover.loading = "eager"; });
+    ["pointerenter", "pointerdown", "focus"].forEach((reach) => booksTab.addEventListener(reach, fetchCovers, { once: true }));
+  }
+
   const postBody = document.querySelector(".post-body");
 
   const postImages = postBody
